@@ -23,6 +23,7 @@ export default function Carousel({ images, auto = true, interval = 5000 }: Carou
   // AUTO PLAY
   const setAutoPlay = (auto: boolean): void | (() => void) => {
     if (auto) {
+      clearAutoPlay() // 先清空计时器再设置
       timer.current = setInterval(() => {
         onClick()
       }, interval)
@@ -80,6 +81,8 @@ export default function Carousel({ images, auto = true, interval = 5000 }: Carou
           return [...prev]
         })
         setPixel(0)
+        clearAutoPlay()
+        setAutoPlay(auto)
         target.current = false
       }, 1000)
     }

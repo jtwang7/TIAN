@@ -20,6 +20,17 @@ export default function Menu({ }: MenuProps): ReactElement {
   const hoverIconStyles = useSpring({ rotate: isHover ? 90 : 0 })
   const hoverStyles = useSpring({ color: isHover ? '#D3FF7C' : '#fff' })
 
+  const [isCancelHover, setCancelHover] = useState<boolean>(false)
+  const onCancelMouseEnter = () => { setCancelHover(true) }
+  const onCancelMouseLeave = () => { setCancelHover(false) }
+  const hoverCancelStyles = useSpring({
+    rotate: isCancelHover ? 360 : 0,
+    duration: 2000,
+    reverse: true,
+    reset: true,
+    loop: true,
+  })
+
   return (
     <>
       <div
@@ -46,7 +57,13 @@ export default function Menu({ }: MenuProps): ReactElement {
           <li><a>ABOUT</a></li>
         </ul>
         <footer className={`footer`}>
-          <i className={`iconfont icon-cancel`} onClick={onClose}></i>
+          <animated.i
+            className={`iconfont icon-cancel`}
+            onClick={onClose}
+            onMouseEnter={onCancelMouseEnter}
+            onMouseLeave={onCancelMouseLeave}
+            style={hoverCancelStyles}
+          ></animated.i>
         </footer>
       </animated.div>
     </>

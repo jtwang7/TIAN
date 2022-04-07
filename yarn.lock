@@ -46,26 +46,26 @@
   "resolved" "https://registry.npmjs.org/@antv/gl-matrix/-/gl-matrix-2.7.1.tgz"
   "version" "2.7.1"
 
-"@antv/l7-component@^2.8.20":
-  "integrity" "sha512-e+noLzqCK5v4jSNjxN1uy92xPRna29mrWuaJSW+UxsPvC10wLSz9JDeK/R6tPfdJw5LH3CS4eNyLiAuRXM6ZWg=="
-  "resolved" "https://registry.npmjs.org/@antv/l7-component/-/l7-component-2.8.20.tgz"
-  "version" "2.8.20"
+"@antv/l7-component@^2.8.21":
+  "integrity" "sha512-+g62uKxoDoSYmhzdTH7qoalggLsr9deX1BPsFNOTkCdx/5sBZtbBsvBDJ7iF7YFt9yO6xccd8/Ad8FuOfoE3AQ=="
+  "resolved" "https://registry.npmjs.org/@antv/l7-component/-/l7-component-2.8.21.tgz"
+  "version" "2.8.21"
   dependencies:
-    "@antv/l7-core" "^2.8.20"
-    "@antv/l7-utils" "^2.8.20"
+    "@antv/l7-core" "^2.8.21"
+    "@antv/l7-utils" "^2.8.21"
     "@babel/runtime" "^7.7.7"
     "eventemitter3" "^4.0.0"
     "inversify" "^5.0.1"
     "reflect-metadata" "^0.1.13"
     "supercluster" "^7.0.0"
 
-"@antv/l7-core@^2.8.20":
-  "integrity" "sha512-P7EWzuhd6+oSCE4RQwKhK95EooyV9LEX4jUZshrRL4oiU/DFWR24QqlFSjshdznwYLlknQDAsjwWNph3tlU2rA=="
-  "resolved" "https://registry.npmjs.org/@antv/l7-core/-/l7-core-2.8.20.tgz"
-  "version" "2.8.20"
+"@antv/l7-core@^2.8.21":
+  "integrity" "sha512-I/IKBNg4EnxX1gclRIW3YTWB3qyfXSVP/QW9zsk7WjHjiINUPLIs22DE/ms1EER0TdaUxkDuuSEBOYq1btlmlA=="
+  "resolved" "https://registry.npmjs.org/@antv/l7-core/-/l7-core-2.8.21.tgz"
+  "version" "2.8.21"
   dependencies:
     "@antv/async-hook" "^2.1.0"
-    "@antv/l7-utils" "^2.8.20"
+    "@antv/l7-utils" "^2.8.21"
     "@babel/runtime" "^7.7.7"
     "ajv" "^6.10.2"
     "element-resize-event" "^3.0.3"
@@ -79,15 +79,15 @@
     "reflect-metadata" "^0.1.13"
     "viewport-mercator-project" "^6.2.1"
 
-"@antv/l7-layers@^2.8.20":
-  "integrity" "sha512-WOitC8wQmgeDctO/JJp54TEgTnGx1KOrzsq4gjwrE869/qg1YzCESQOzRFU3cWVgNJ4di5v0GKPix6syjzcPQw=="
-  "resolved" "https://registry.npmjs.org/@antv/l7-layers/-/l7-layers-2.8.20.tgz"
-  "version" "2.8.20"
+"@antv/l7-layers@^2.8.21":
+  "integrity" "sha512-wa961+QQO2Bd+5YuijHDD1W0vI0OAOx8aSE6StveOi77fq+JE0aP6IsVQ+pWFMCShGpLCoHn+SafObHNPe4DIg=="
+  "resolved" "https://registry.npmjs.org/@antv/l7-layers/-/l7-layers-2.8.21.tgz"
+  "version" "2.8.21"
   dependencies:
     "@antv/geo-coord" "^1.0.8"
-    "@antv/l7-core" "^2.8.20"
-    "@antv/l7-source" "^2.8.20"
-    "@antv/l7-utils" "^2.8.20"
+    "@antv/l7-core" "^2.8.21"
+    "@antv/l7-source" "^2.8.21"
+    "@antv/l7-utils" "^2.8.21"
     "@babel/runtime" "^7.7.7"
     "@mapbox/martini" "^0.2.0"
     "@turf/meta" "^6.0.2"
@@ -105,27 +105,27 @@
     "polyline-miter-util" "^1.0.1"
     "reflect-metadata" "^0.1.13"
 
-"@antv/l7-map@^2.8.20":
-  "integrity" "sha512-1rNuUPsKXCJ6tPjEHWT2KxA7qG0VzL73LwmeHqx1qultnV6gz+y+HrZ7QlZoYweI1JFTVt6TORbHbtHUA2UZ4g=="
-  "resolved" "https://registry.npmjs.org/@antv/l7-map/-/l7-map-2.8.20.tgz"
-  "version" "2.8.20"
+"@antv/l7-map@^2.8.21":
+  "integrity" "sha512-YdDTfzyBYOGFwcEzK4CNW1ep2wVSeL/rW2rb1sg6QQgHJTNf8Ar7DVlBNMpenTs/ZtOxt6E+UsFLU+R++sxiuQ=="
+  "resolved" "https://registry.npmjs.org/@antv/l7-map/-/l7-map-2.8.21.tgz"
+  "version" "2.8.21"
   dependencies:
-    "@antv/l7-utils" "^2.8.20"
+    "@antv/l7-utils" "^2.8.21"
     "@babel/runtime" "^7.7.7"
     "@mapbox/point-geometry" "^0.1.0"
     "@mapbox/unitbezier" "^0.0.0"
     "eventemitter3" "^4.0.4"
     "lodash" "^4.17.15"
 
-"@antv/l7-maps@^2.8.20":
-  "integrity" "sha512-4pFyQ8OCpEm3v8z26KwmsFQ8gyleQWGkKlAMMvIkgLEEqEs4kYZFXloAAeaqk9qzkykaTPo2i+cWVHY3euJKwQ=="
-  "resolved" "https://registry.npmjs.org/@antv/l7-maps/-/l7-maps-2.8.20.tgz"
-  "version" "2.8.20"
+"@antv/l7-maps@^2.8.20", "@antv/l7-maps@^2.8.21":
+  "integrity" "sha512-DW44OHz2FCL43KVDN0WdycsvPpYM4Wdr2Mz5fypfby8qk0tDs/N8ZkBDfZjlSU7TST1nEeEumAzwgxVNVPdkSg=="
+  "resolved" "https://registry.npmjs.org/@antv/l7-maps/-/l7-maps-2.8.21.tgz"
+  "version" "2.8.21"
   dependencies:
     "@amap/amap-jsapi-loader" "^0.0.3"
-    "@antv/l7-core" "^2.8.20"
-    "@antv/l7-map" "^2.8.20"
-    "@antv/l7-utils" "^2.8.20"
+    "@antv/l7-core" "^2.8.21"
+    "@antv/l7-map" "^2.8.21"
+    "@antv/l7-utils" "^2.8.21"
     "@babel/runtime" "^7.7.7"
     "@types/amap-js-api" "^1.4.6"
     "@types/mapbox-gl" "^1.11.2"
@@ -135,42 +135,42 @@
     "reflect-metadata" "^0.1.13"
     "viewport-mercator-project" "^6.2.1"
 
-"@antv/l7-renderer@^2.8.20":
-  "integrity" "sha512-uLEeiZWOi0WMQL3EPbfg2dAAQIOnWZSBsLX6PZ8jKgcDnNQcteFvHoH4YTJ1jsn9s1fXu27fpO4cfR6mjTlF/g=="
-  "resolved" "https://registry.npmjs.org/@antv/l7-renderer/-/l7-renderer-2.8.20.tgz"
-  "version" "2.8.20"
+"@antv/l7-renderer@^2.8.21":
+  "integrity" "sha512-J177l4xyIuO+dcQJ2HbpOrrE7Lyw3JXkGBRdRI7PqWucI0yVvqoZF7zzcnfa9k4dgqqRq3r6i9WFd94BTUq5yA=="
+  "resolved" "https://registry.npmjs.org/@antv/l7-renderer/-/l7-renderer-2.8.21.tgz"
+  "version" "2.8.21"
   dependencies:
-    "@antv/l7-core" "^2.8.20"
+    "@antv/l7-core" "^2.8.21"
     "@babel/runtime" "^7.7.7"
     "inversify" "^5.0.1"
     "l7regl" "^0.0.20"
     "lodash" "^4.17.15"
     "reflect-metadata" "^0.1.13"
 
-"@antv/l7-scene@^2.8.20":
-  "integrity" "sha512-fI2ABEkCjjNK6fHFws8ykTTl/nVzwdonlAIKSyW7RGHv9DZyIsT+iHWz/REVXyC73PveNLVgd6QHFDVctY3+xw=="
-  "resolved" "https://registry.npmjs.org/@antv/l7-scene/-/l7-scene-2.8.20.tgz"
-  "version" "2.8.20"
+"@antv/l7-scene@^2.8.21":
+  "integrity" "sha512-0X7hzbzrr56xmu/g9tvBUW0ItZtSeEq/X7b7w7UIDeeQsjigva+ZV6qP2P+3dZi5UbLgUafCWlJSPcte99lHNg=="
+  "resolved" "https://registry.npmjs.org/@antv/l7-scene/-/l7-scene-2.8.21.tgz"
+  "version" "2.8.21"
   dependencies:
-    "@antv/l7-component" "^2.8.20"
-    "@antv/l7-core" "^2.8.20"
-    "@antv/l7-layers" "^2.8.20"
-    "@antv/l7-maps" "^2.8.20"
-    "@antv/l7-renderer" "^2.8.20"
-    "@antv/l7-utils" "^2.8.20"
+    "@antv/l7-component" "^2.8.21"
+    "@antv/l7-core" "^2.8.21"
+    "@antv/l7-layers" "^2.8.21"
+    "@antv/l7-maps" "^2.8.21"
+    "@antv/l7-renderer" "^2.8.21"
+    "@antv/l7-utils" "^2.8.21"
     "@babel/runtime" "^7.7.7"
     "inversify" "^5.0.1"
     "mapbox-gl" "^1.2.1"
     "reflect-metadata" "^0.1.13"
 
-"@antv/l7-source@^2.8.20":
-  "integrity" "sha512-K++h20RfSL/Z9Ru6YJ2As9ZCOUAPCDrEfwKXB6IUH+R7LZowYYPUrKZyZxzAuuqv4/etA6qH1p/kIAv/OyGNZw=="
-  "resolved" "https://registry.npmjs.org/@antv/l7-source/-/l7-source-2.8.20.tgz"
-  "version" "2.8.20"
+"@antv/l7-source@^2.8.21":
+  "integrity" "sha512-hV7w1ZT6x2HYoz/P8A5rMgPfPJBP1o3z6qzHouq1NcIbvzkex8BNnGFADMUz8DBLX63olpONDqXbhntvAzEceg=="
+  "resolved" "https://registry.npmjs.org/@antv/l7-source/-/l7-source-2.8.21.tgz"
+  "version" "2.8.21"
   dependencies:
     "@antv/async-hook" "^2.1.0"
-    "@antv/l7-core" "^2.8.20"
-    "@antv/l7-utils" "^2.8.20"
+    "@antv/l7-core" "^2.8.21"
+    "@antv/l7-utils" "^2.8.21"
     "@babel/runtime" "^7.7.7"
     "@mapbox/geojson-rewind" "^0.4.0"
     "@turf/helpers" "^6.1.4"
@@ -184,27 +184,27 @@
     "reflect-metadata" "^0.1.13"
     "supercluster" "^7.0.0"
 
-"@antv/l7-utils@^2.8.20":
-  "integrity" "sha512-NmXxAoR0PLvTvejUxsuCJpvwfFrNZrHtlQ/MLb32zXsdtTvLVWp77b9UWwXm46ezuYLXHP5nsoZmV7m469UCJg=="
-  "resolved" "https://registry.npmjs.org/@antv/l7-utils/-/l7-utils-2.8.20.tgz"
-  "version" "2.8.20"
+"@antv/l7-utils@^2.8.21":
+  "integrity" "sha512-EVHVg9jcuq4aTquiWfXo5l3c8eGYizCg/PyWBs195YeqS0d6kVo8JcufJ4OV9MplZGfo5I+C2H1KSaxpPZRvCA=="
+  "resolved" "https://registry.npmjs.org/@antv/l7-utils/-/l7-utils-2.8.21.tgz"
+  "version" "2.8.21"
   dependencies:
     "@babel/runtime" "^7.7.7"
     "@turf/helpers" "^6.1.4"
     "d3-color" "^1.4.0"
 
-"@antv/l7@^2.7.22", "@antv/l7@^2.8.20":
-  "integrity" "sha512-XiwXDycuFeN9qEwPvIwdmDwYyGxG6gUx+NcsBYOGZxXuzGf/mC61C+PXnJEEifmviJaALSXOHEM4iNN31YS1+w=="
-  "resolved" "https://registry.npmjs.org/@antv/l7/-/l7-2.8.20.tgz"
-  "version" "2.8.20"
+"@antv/l7@^2.7.22", "@antv/l7@^2.8.21":
+  "integrity" "sha512-5XrmRsz7obiVrP3XNiw/tNW/CwbPVmvo/O8mnEQE74XESYjTOypdaz2bZ7CJZPci90RPPpRkVQpJgV3rtHxG4Q=="
+  "resolved" "https://registry.npmjs.org/@antv/l7/-/l7-2.8.21.tgz"
+  "version" "2.8.21"
   dependencies:
-    "@antv/l7-component" "^2.8.20"
-    "@antv/l7-core" "^2.8.20"
-    "@antv/l7-layers" "^2.8.20"
-    "@antv/l7-maps" "^2.8.20"
-    "@antv/l7-scene" "^2.8.20"
-    "@antv/l7-source" "^2.8.20"
-    "@antv/l7-utils" "^2.8.20"
+    "@antv/l7-component" "^2.8.21"
+    "@antv/l7-core" "^2.8.21"
+    "@antv/l7-layers" "^2.8.21"
+    "@antv/l7-maps" "^2.8.21"
+    "@antv/l7-scene" "^2.8.21"
+    "@antv/l7-source" "^2.8.21"
+    "@antv/l7-utils" "^2.8.21"
     "@babel/runtime" "^7.7.7"
 
 "@antv/l7plot-component@^0.0.4":
@@ -5707,6 +5707,11 @@
     "define-property" "^0.2.5"
     "isobject" "^3.0.0"
     "static-extend" "^0.1.1"
+
+"classnames@^2.3.1":
+  "integrity" "sha512-OlQdbZ7gLfGarSqxesMesDa5uz7KFbID8Kpq/SxIoNGDqY8lSYs0D+hhtBXhcdB3rcbXArFr7vlHheLk1voeNA=="
+  "resolved" "https://registry.npmjs.org/classnames/-/classnames-2.3.1.tgz"
+  "version" "2.3.1"
 
 "clean-css@^4.2.3":
   "integrity" "sha512-EJUDT7nDVFDvaQgAo2G/PJvxmp1o/c6iXLbswsBbUFXi1Nr+AjA2cKmfbKDMjMvzEe75g3P6JkaDDAKk96A85A=="

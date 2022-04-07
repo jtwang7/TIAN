@@ -1,18 +1,21 @@
 import { ReactElement, useMemo, useRef } from 'react'
 import ImageBoxTypeOneClass from './TypeTwo.module.scss';
 import type { reactProps, sizeProps } from '../../../types/baseTypes';
+import type {ImageBoxProps} from '../imageBoxTypes';
 import { useSpring, animated } from 'react-spring';
+import classNames from 'classnames';
 // hooks
 import { useHover } from '../../../hooks/useHover';
 
-interface Props {
-  imageUrl?: string,
+interface Props extends ImageBoxProps {
+
 }
 
 export default function TypeTwo({
-  imageUrl = '',
+  imageUrl,
   style,
   children,
+  className = '',
 }: Props & reactProps & sizeProps): ReactElement {
   const {
     isHover,
@@ -34,10 +37,15 @@ export default function TypeTwo({
     duration: 300,
   })
 
+  const containerClassName = classNames({
+    [ImageBoxTypeOneClass['container']]: true,
+    [className]: true,
+  })
+
   return (
     <div
       ref={ref}
-      className={ImageBoxTypeOneClass['container']}
+      className={containerClassName}
       style={style}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

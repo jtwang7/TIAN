@@ -1,16 +1,17 @@
 import React, { ReactElement, useMemo, useRef } from 'react'
 import ImageBoxTypeOneClass from './TypeOne.module.scss';
 import type { reactProps, sizeProps } from '../../../types/baseTypes';
+import type { ImageBoxProps } from '../imageBoxTypes';
 import { useSpring, animated } from 'react-spring';
 // hooks
 import { useHover } from '../../../hooks/useHover';
 
-interface Props {
-  imageUrl?: string,
+interface Props extends ImageBoxProps {
+
 }
 
 export default function TypeOne({
-  imageUrl = '',
+  imageUrl,
   style,
   children,
 }: Props & reactProps & sizeProps): ReactElement {

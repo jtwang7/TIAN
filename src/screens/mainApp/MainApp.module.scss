@@ -1,0 +1,39 @@
+.main-app-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  z-index: 0;
+
+  :global {
+    .nav-content {
+      position: fixed;
+      z-index: 10;
+      top: 10px;
+      right: 10px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      cursor: pointer;
+
+      a {
+        text-decoration: none;
+        color: #fff;
+      }
+
+      .a1 {
+        font-family: "ars_maquette_pro";
+        text-align: justify;
+        text-align-last: justify;
+        font-weight: bolder;
+        font-size: 20px;
+      }
+      .a2 {
+        text-align: justify;
+        text-align-last: justify;
+        font-weight: bolder;
+        font-size: 10px;
+      }
+    }
+  }
+}

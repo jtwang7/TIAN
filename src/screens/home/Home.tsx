@@ -7,7 +7,6 @@ import {
   Thor049,
   Thor050,
 } from '../../images/home';
-import Menu from '../../components/menu/Menu'
 import Carousel from '../../components/carousel/Carousel'
 
 
@@ -45,12 +44,7 @@ export default function Home({ }: Props): ReactElement {
 
   return (
     <div className={HomeClass['home-container']}>
-      <Menu />
       <Carousel images={images} />
-      <nav className='nav-content'>
-        <a href="http://wangjintian.com" className='a1'>LIFE IN TIAN‘s Blog.com</a>
-        <a className='a2'>LIFE PHOTOGRAPHY BY WANG JINTIAN</a>
-      </nav>
     </div>
   )
 }

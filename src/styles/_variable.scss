@@ -1,0 +1,37 @@
+
+/* 基础色彩系统 */
+$blue:        #0d6efd !default;
+$indigo:      #6610f2 !default;
+$white:       #fff !default;
+$black:       #111 !default;
+$rice-white:  #fffef4 !default; // 米白色
+
+
+/* 基础字体系统 */
+// 字体样式
+$font-family-sans-serif:      -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji" !default;
+$font-family-monospace:       SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !default;
+$font-family-base:            $font-family-sans-serif !default;
+// 字体大小
+$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$font-size-lg:                $font-size-base * 1.25 !default;
+$font-size-sm:                $font-size-base * .875 !default;
+$font-size-root:              null !default;
+// 字体阴影
+$text-shadow-center-black:    0 0 18px rgba(0, 0, 0, 0.45) !default;
+$text-shadow-bottom-black:    0 6px 18px rgba(0, 0, 0, 0.45) !default;
+$text-shadow-top-black:       0 -6px 18px rgba(0, 0, 0, 0.45) !default;
+$text-shadow-center-white:    0 0 18px rgba(255, 255, 255, 0.45) !default;
+$text-shadow-bottom-white:    0 6px 18px rgba(255, 255, 255, 0.45) !default;
+$text-shadow-top-white:       0 -6px 18px rgba(255, 255, 255, 0.45) !default;
+// 立体字体阴影
+$text-shadow-pop-tr: 1px -1px #555555, 2px -2px #555555, 3px -3px #555555, 4px -4px #555555, 5px -5px #555555, 6px -6px #555555, 7px -7px #555555, 8px -8px #555555;
+// 字重
+$font-weight-lighter:         lighter !default;
+$font-weight-light:           300 !default;
+$font-weight-bold:            700 !default;
+$font-weight-bolder:          bolder !default;
+// 行高
+$line-height-base:            1.5 !default;
+// 标题大小
+$h1-font-size:                $font-size-base * 2.5 !default;

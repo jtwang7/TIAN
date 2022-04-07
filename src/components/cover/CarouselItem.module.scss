@@ -1,0 +1,27 @@
+.carousel-item-container {
+  position: fixed;
+  inset: 0px;
+
+  :global {
+    .title-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .title {
+      }
+  
+      .sub-title {
+      }
+    }
+
+    .background-image {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      inset: 0px;
+      transition: transform 0.3s ease-in-out;
+    }
+  }
+}

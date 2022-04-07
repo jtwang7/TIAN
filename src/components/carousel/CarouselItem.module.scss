@@ -1,0 +1,49 @@
+.carousel-item-container {
+  position: fixed;
+  inset: 0px;
+  z-index: 0;
+
+  :global {
+    .carousel-item-content {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+
+      .title-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 90%;
+        height: 90%;
+        margin: auto auto;
+        color: #fff;
+        position: relative;
+        z-index: 1;
+        cursor: default;
+  
+        .sub-title {
+          font-family: 'beauty-demo';
+          font-size: 70px;
+          line-height: 10px;
+          font-weight: normal;
+          padding-top: 70px;
+        }
+  
+        .title {
+          font-family: 'ars_maquette_pro';
+          font-size: 50px;
+          font-weight: bolder;
+        }
+      }
+  
+      .background-image {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        inset: 0px;
+        transition: transform 0.3s ease-in-out;
+      }
+    }
+  }
+}

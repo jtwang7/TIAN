@@ -1,0 +1,65 @@
+.menu-btn-container {
+  cursor: pointer;
+  margin: 10px 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 999;
+  color: #fff;
+
+  .menu-text {
+    font-family: 'ars_maquette_pro';
+    font-weight: bolder;
+    font-size: 18px;
+    text-transform: uppercase; // 指定文本全部大写
+  }
+}
+
+.menu-slider-container {
+  height: 100vh;
+  background-color: #303030;
+  color: #fff;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 999;
+  overflow: hidden;
+
+  :global {
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      li {
+        cursor: pointer;
+        a {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          width: 100%;
+          padding: 5px 0;
+          &:hover {
+            background: #fff;
+            color: #303030;
+          }
+        }
+      }
+    }
+    footer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      cursor: pointer;
+      padding-bottom: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}

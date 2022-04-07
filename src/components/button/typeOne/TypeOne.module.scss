@@ -1,0 +1,30 @@
+.type-one-container {
+  border: 2px solid #fff;
+  overflow: hidden;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  span {
+    color: #fff;
+    z-index: 1;
+    font-size: 20px;
+    font-family: 'ars_maquette_pro';
+    transition: color .3s ease-in-out;
+  }
+  &:hover {
+    span {
+      color: #111;
+    }
+  }
+
+  :global {
+    .background-container {
+      background-color: #fff;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

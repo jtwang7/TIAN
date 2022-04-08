@@ -21,3 +21,8 @@ code {
   font-family: 'ars_maquette_pro';
   src: url(./fonts/ARSMaquettePro.ttf);
 }
+
+@font-face {
+  font-family: 'dtl_albertina_tregular';
+  src: url(./fonts/DTL\ Albertina\ T\ Regular.otf);
+}

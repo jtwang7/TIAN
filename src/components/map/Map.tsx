@@ -20,6 +20,7 @@ export default function Map({ }: Props): ReactElement {
         rotateEnable: false, // 禁止地图旋转
         zoomEnable: false, // 禁止地图缩放
         dragEnable: false, // 禁止地图拖拽
+        showLabel: false, // 隐藏文字标注
       })
     });
     scene.current.on('loaded', () => {

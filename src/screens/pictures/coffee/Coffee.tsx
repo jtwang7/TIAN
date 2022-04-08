@@ -28,6 +28,15 @@ export default function Coffee({ }: Props): ReactElement {
     {
       url: Thor028,
     },
+    {
+      url: Thor028,
+    },
+    {
+      url: Thor028,
+    },
+    {
+      url: Thor028,
+    },
   ]
   return (
     <PictureWall

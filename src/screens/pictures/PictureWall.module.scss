@@ -5,9 +5,6 @@
   :global {
     .pictures-content {
       width: 100%;
-      overflow: auto;
-      display: flex;
-      flex-wrap: wrap;
 
       .title-block {
         width: 100%;
@@ -50,16 +47,31 @@
         }
       }
 
-      .picture-content {
-        flex: 0 0 25%;
-      }
-
-      .description {
-        padding: 10px;
+      .pictures-block {
+        width: 100%;
         display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        justify-content: space-around;
+        flex-wrap: wrap;
+        position: relative;
+
+        .picture-content {
+          flex: 0 0 25%;
+        }
+
+        .description {
+          padding: 10px;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          justify-content: space-around;
+        }
+
+        &::before {
+          display: block;
+          content: '';
+          background-color: #353535;
+          position: absolute;
+          inset: 0;
+        }
       }
     }
   }

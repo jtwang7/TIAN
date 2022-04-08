@@ -6,4 +6,4 @@ export default {
   component: Menu,
 } as ComponentMeta<typeof Menu>;
 
-export const Primary: ComponentStory<typeof Menu> = () => <Menu />;
+export const Primary: ComponentStory<typeof Menu> = () => <Menu routes={[{ name: 'HOME', path: '/home' }]} />;

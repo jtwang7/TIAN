@@ -2,8 +2,8 @@ import React, { ReactElement, useEffect } from 'react'
 import PictureWallClass from './PictureWall.module.scss'
 import Map from '../../components/map/Map'
 import ImageBoxTypeTwo from '../../components/imageBox/typeTwo/TypeTwo'
-import {useScroll} from '../../hooks/useScroll';
-import {useSpring, animated} from 'react-spring';
+import { useScroll } from '../../hooks/useScroll';
+import { useSpring, animated } from 'react-spring';
 
 export type ImageContentTypes = {
   url: string,
@@ -25,7 +25,7 @@ export default function PictureWall({
   contents,
 }: PictureWallProps): ReactElement {
   const isShow = useScroll(80)
-  const titleOpacity = useSpring({opacity: isShow ? 0 : 1})
+  const titleOpacity = useSpring({ opacity: isShow ? 0 : 1 })
 
   return (
     <div className={PictureWallClass['container']}>
@@ -41,22 +41,24 @@ export default function PictureWall({
             <span className={`place-name`}>{title?.placeName}</span>
           </animated.header>
         </div>
-        {
-          contents?.map((item, idx) => (
-            <ImageBoxTypeTwo
-              imageUrl={item.url}
-              key={idx}
-              className={'picture-content'}
-              style={{
-                height: '300px',
-              }}
-            >
-              <div className={`description`}>
-                <span></span>
-              </div>
-            </ImageBoxTypeTwo>
-          ))
-        }
+        <div className={`pictures-block`}>
+          {
+            contents?.map((item, idx) => (
+              <ImageBoxTypeTwo
+                imageUrl={item.url}
+                key={idx}
+                className={'picture-content'}
+                style={{
+                  height: '300px',
+                }}
+              >
+                <div className={`description`}>
+                  <span></span>
+                </div>
+              </ImageBoxTypeTwo>
+            ))
+          }
+        </div>
       </section>
     </div>
   )

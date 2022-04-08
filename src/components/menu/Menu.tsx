@@ -3,11 +3,13 @@ import MenuClass from './Menu.module.scss';
 import '../../styles/iconfont/iconfont.css';
 import { useSpring, animated } from 'react-spring';
 
+type routeType = { name: string, path: string }
+export declare type routesType = routeType[]
 interface MenuProps {
-
+  routes?: routesType,
 }
 
-export default function Menu({ }: MenuProps): ReactElement {
+export default function Menu({ routes }: MenuProps): ReactElement {
   const [isShow, setShow] = useState<boolean>(false)
   const onClose = () => { setShow(false) }
   const onOpen = () => { setShow(true) }
@@ -53,9 +55,12 @@ export default function Menu({ }: MenuProps): ReactElement {
         <animated.span className={MenuClass['menu-text']} style={{ ...hoverStyles }}>MENU</animated.span>
       </div>
       <animated.div className={MenuClass['menu-slider-container']} style={{ width: '200px', ...styles }}>
-        <ul>
-          <li><a>HOME</a></li>
-          <li><a>ABOUT</a></li>
+        <ul style={{marginTop: '10px'}}>
+          {
+            routes?.map((route, idx) => (
+              <li key={idx}><a href={route.path}>{route.name}</a></li>
+            ))
+          }
         </ul>
         <footer className={`footer`}>
           <animated.i
@@ -63,7 +68,7 @@ export default function Menu({ }: MenuProps): ReactElement {
             onClick={onClose}
             onMouseEnter={onCancelMouseEnter}
             onMouseLeave={onCancelMouseLeave}
-            style={{fontSize: '20px', ...hoverCancelStyles}}
+            style={{ fontSize: '20px', ...hoverCancelStyles }}
           ></animated.i>
         </footer>
       </animated.div>

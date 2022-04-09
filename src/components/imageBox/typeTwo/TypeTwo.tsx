@@ -1,6 +1,6 @@
 import { ReactElement, useMemo, useRef } from 'react'
 import ImageBoxTypeOneClass from './TypeTwo.module.scss';
-import type { reactProps, sizeProps } from '../../../types/baseTypes';
+import type { ReactProps, SizeProps } from '../../../types/baseTypes';
 import type {ImageBoxProps} from '../imageBoxTypes';
 import { useSpring, animated } from 'react-spring';
 import classNames from 'classnames';
@@ -16,7 +16,7 @@ export default function TypeTwo({
   style,
   children,
   className = '',
-}: Props & reactProps & sizeProps): ReactElement {
+}: Props & ReactProps & SizeProps): ReactElement {
   const {
     isHover,
     onMouseEnter,

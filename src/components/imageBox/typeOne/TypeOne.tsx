@@ -1,6 +1,6 @@
 import React, { ReactElement, useMemo, useRef } from 'react'
 import ImageBoxTypeOneClass from './TypeOne.module.scss';
-import type { reactProps, sizeProps } from '../../../types/baseTypes';
+import type { ReactProps, SizeProps } from '../../../types/baseTypes';
 import type { ImageBoxProps } from '../imageBoxTypes';
 import { useSpring, animated } from 'react-spring';
 // hooks
@@ -14,7 +14,7 @@ export default function TypeOne({
   imageUrl,
   style,
   children,
-}: Props & reactProps & sizeProps): ReactElement {
+}: Props & ReactProps & SizeProps): ReactElement {
   const {
     isHover: isFirstHover,
     onMouseEnter: onFirstMouseEnter,

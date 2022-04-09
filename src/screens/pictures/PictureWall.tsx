@@ -2,6 +2,7 @@ import React, { ReactElement, useEffect } from 'react'
 import PictureWallClass from './PictureWall.module.scss'
 import Map from '../../components/map/Map'
 import ImageBoxTypeTwo from '../../components/imageBox/typeTwo/TypeTwo'
+import BackTop from '../../components/backTop/BackTop';
 import { useScroll } from '../../hooks/useScroll';
 import { useSpring, animated } from 'react-spring';
 
@@ -60,6 +61,8 @@ export default function PictureWall({
           }
         </div>
       </section>
+      {/* Back to Top */}
+      <BackTop isShow={isShow} />
     </div>
   )
 }

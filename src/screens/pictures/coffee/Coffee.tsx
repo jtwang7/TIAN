@@ -20,22 +20,28 @@ export default function Coffee({ }: Props): ReactElement {
   }
   const contents = [
     {
-      url: Thor012,
+      alt: 'abc',
+      src: Thor012,
     },
     {
-      url: Thor019,
+      alt: 'abc',
+      src: Thor019,
     },
     {
-      url: Thor028,
+      alt: 'abc',
+      src: Thor028,
     },
     {
-      url: Thor028,
+      alt: 'abc',
+      src: Thor012,
     },
     {
-      url: Thor028,
+      alt: 'abc',
+      src: Thor019,
     },
     {
-      url: Thor028,
+      alt: 'abc',
+      src: Thor028,
     },
   ]
   return (

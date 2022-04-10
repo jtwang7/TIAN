@@ -1,14 +1,14 @@
-import React, { ReactElement, useEffect } from 'react'
+import { ReactElement, useEffect } from 'react'
 import PictureWallClass from './PictureWall.module.scss'
 import Map from '../../components/map/Map'
 import ImageBoxTypeTwo from '../../components/imageBox/typeTwo/TypeTwo'
 import BackTop from '../../components/backTop/BackTop';
 import { useScroll } from '../../hooks/useScroll';
 import { useSpring, animated } from 'react-spring';
-
-export type ImageContentTypes = {
-  url: string,
-}
+// types
+import {ImgsType} from '../../components/lazyLoad/types';
+// components
+import LazyLoad from '../../components/lazyLoad/LazyLoad';
 
 export type TitleTypes = {
   position: string,
@@ -18,7 +18,7 @@ export type TitleTypes = {
 
 export interface PictureWallProps {
   title?: TitleTypes,
-  contents?: ImageContentTypes[]
+  contents?: ImgsType,
 }
 
 export default function PictureWall({
@@ -43,10 +43,10 @@ export default function PictureWall({
           </animated.header>
         </div>
         <div className={`pictures-block`}>
-          {
+          {/* {
             contents?.map((item, idx) => (
               <ImageBoxTypeTwo
-                imageUrl={item.url}
+                imageUrl={item.src}
                 key={idx}
                 className={'picture-content'}
                 style={{
@@ -58,7 +58,8 @@ export default function PictureWall({
                 </div>
               </ImageBoxTypeTwo>
             ))
-          }
+          } */}
+          {contents && <LazyLoad imgs={contents} />}
         </div>
       </section>
       {/* Back to Top */}

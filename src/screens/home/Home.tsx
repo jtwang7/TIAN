@@ -2,7 +2,6 @@ import { ReactElement } from 'react'
 import HomeClass from './Home.module.scss'
 import {
   Thor012,
-  Thor019,
   Thor028,
   Thor049,
   Thor050,

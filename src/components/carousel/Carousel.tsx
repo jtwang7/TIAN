@@ -60,9 +60,10 @@ export default function Carousel({ images, auto = true, interval = 5000 }: Carou
   useEffect(() => {
     try {
       setCarouselItems(prev => {
-        const lastOne = prev.pop()
-        prev.reverse()
-        return [...prev, lastOne!]
+        const current = _.cloneDeep(prev)
+        const lastOne = current.pop()
+        const arr = current.reverse()
+        return [...arr, lastOne!]
       })
     } catch (err) {
       console.log(err)
@@ -75,13 +76,14 @@ export default function Carousel({ images, auto = true, interval = 5000 }: Carou
       target.current = true
       setPixel(document.body.clientWidth)
       setTimeout(() => {
+        // !先重置pixel, 后更新数组
+        setPixel(0) 
         setCarouselItems(prev => {
-          const lastOne = prev.pop()
-          prev.unshift(lastOne!)
-          return [...prev]
+          const current = _.cloneDeep(prev)
+          const lastOne = current.pop()
+          current.unshift(lastOne!)
+          return current
         })
-        setPixel(0)
-        clearAutoPlay()
         setAutoPlay(auto)
         target.current = false
       }, 1000)
@@ -135,8 +137,8 @@ export default function Carousel({ images, auto = true, interval = 5000 }: Carou
             title={item.title}
             subTitle={item.subTitle}
             hoverPixel={hoverPixel}
-            handleMouseEnter={() => {clearAutoPlay()}}
-            handleMouseLeave={() => {setAutoPlay(auto)}}
+            handleMouseEnter={() => { clearAutoPlay() }}
+            handleMouseLeave={() => { setAutoPlay(auto) }}
           />
         ))
       }

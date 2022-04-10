@@ -42,7 +42,7 @@ export default function LazyLoad({
         }}
       >
         {imgs.map(({ alt, src }, idx) => (
-          <div style={{ width: '25%', height: imgHeight, zIndex: '1' }}>
+          <div style={{ width: '25%', height: imgHeight, zIndex: '1', cursor: 'pointer' }}>
             <img
               key={idx}
               ref={(element) => { refs.current.push(element!) }}

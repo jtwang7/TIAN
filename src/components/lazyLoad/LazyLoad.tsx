@@ -32,30 +32,27 @@ export default function LazyLoad({
   }, [])
 
   return (
-    <div
-      style={{
-        width: '100vw',
-        display: 'flex',
-        flexWrap: 'wrap',
-        position: 'relative',
-      }}
-    >
-      {/* <SRLWrapper>
+    <SRLWrapper>
+      <div
+        style={{
+          width: '100vw',
+          display: 'flex',
+          flexWrap: 'wrap',
+          position: 'relative',
+        }}
+      >
         {imgs.map(({ alt, src }, idx) => (
-          <img key={idx} ref={(element) => {refs.current.push(element!)}} style={{ flex: '0 0 25%' }} alt={alt} data-src={src} />
+          <div style={{ width: '25%', height: imgHeight, zIndex: '1' }}>
+            <img
+              key={idx}
+              ref={(element) => { refs.current.push(element!) }}
+              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+              alt={alt}
+              data-src={src}
+            />
+          </div>
         ))}
-      </SRLWrapper> */}
-      {imgs.map(({ alt, src }, idx) => (
-        <div style={{ width: '25%', height: imgHeight, zIndex: '1' }}>
-          <img
-            key={idx}
-            ref={(element) => { refs.current.push(element!) }}
-            style={{objectFit: 'cover', width: '100%', height: '100%'}}
-            alt={alt}
-            data-src={src}
-          />
-        </div>
-      ))}
-    </div>
+      </div>
+    </SRLWrapper>
   )
 }

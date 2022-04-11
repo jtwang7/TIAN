@@ -11,7 +11,8 @@ export declare type ImgTypeTwo = {
   date: string, // 拍摄日期
   name: string, // 店名
   place: string, // 地点
-  desc: string, // 描述
+  desc: string = '', // 描述
+  coord?: [number, number], // 地理坐标
 }
 
 export declare type ImgsType = (ImgTypeOne | ImgTypeTwo)[]

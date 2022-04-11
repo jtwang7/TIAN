@@ -19,7 +19,6 @@ export default function LazyLoad({
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const target = entry.target as HTMLImageElement
-          console.log(target)
           if (target.dataset.src) {
             target.src = target.dataset.src
             Reflect.deleteProperty(target.dataset, 'src')
@@ -42,17 +41,6 @@ export default function LazyLoad({
           position: 'relative',
         }}
       >
-        {/* {imgs.map(({ alt, src }, idx) => (
-          <div style={{ width: '25%', height: imgHeight, zIndex: '1', cursor: 'pointer' }}>
-            <img
-              key={idx}
-              ref={(element) => { refs.current.push(element!) }}
-              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-              alt={alt}
-              data-src={src}
-            />
-          </div>
-        ))} */}
         {imgs.map((img, idx) => (
           <ImageBox
             style={{width: '25%', height: imgHeight, zIndex: '1', cursor: 'pointer' }}

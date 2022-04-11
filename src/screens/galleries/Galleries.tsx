@@ -1,4 +1,4 @@
-import { ReactElement, useEffect } from 'react'
+import { ReactElement } from 'react'
 import GalleriesClass from './Galleries.module.scss'
 // hooks
 import { useScroll } from '../../hooks/useScroll';
@@ -34,7 +34,7 @@ export default function PictureWall({
     <>
       <div className={GalleriesClass['container']}>
         {/* 地图容器 */}
-        <Map />
+        <Map contents={contents} />
         {/* 照片容器 */}
         <section className={`pictures-content`}>
           <div className={`title-block`}>

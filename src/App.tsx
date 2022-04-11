@@ -1,13 +1,15 @@
-import { ReactElement } from 'react'
+import { ReactElement, useEffect, useState } from 'react'
 import {
   BrowserRouter,
   Routes,
   Route,
 } from "react-router-dom";
+// types
 import type { routesType } from './components/menu/Menu';
+// components
 import MainApp from './screens/mainApp/MainApp';
 import Home from './screens/home/Home';
-import Coffee from './screens/pictures/coffee/Coffee';
+import Coffee from './screens/galleries/coffee/Coffee';
 
 interface Props {
 
@@ -15,8 +17,8 @@ interface Props {
 
 export default function Root({ }: Props): ReactElement {
   const routes: routesType = [
-    {name: 'HOME', path: '/home'},
-    {name: 'COFFEE', path: '/coffee'},
+    { name: 'HOME', path: '/home' },
+    { name: 'COFFEE', path: '/coffee' },
   ]
 
   return (

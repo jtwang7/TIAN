@@ -8,6 +8,7 @@
   overflow: hidden;
   cursor: pointer;
   transition: background-color .3s ease-in-out;
+  z-index: 999;
 
   &:hover {
     background-color: #9bcf34;

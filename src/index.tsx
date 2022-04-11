@@ -1,15 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
-import SimpleReactLightbox from 'simple-react-lightbox'; // react灯箱库
+// react灯箱库
+import SimpleReactLightbox from 'simple-react-lightbox'; 
+// react-redux
+import store from './app/store';
+import { Provider } from 'react-redux';
+// components
+import App from './App';
+import './index.css';
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <SimpleReactLightbox>
-    <App />
-  </SimpleReactLightbox>
+    <Provider store={store} >
+      <SimpleReactLightbox>
+        <App />
+      </SimpleReactLightbox>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react'
-import type { TitleTypes } from '../PictureWall'
-import PictureWall from '../PictureWall'
+import type { TitleTypes } from '../Galleries'
+import Galleries from '../Galleries'
 import {
   Thor012,
   Thor019,
@@ -45,7 +45,7 @@ export default function Coffee({ }: Props): ReactElement {
     },
   ]
   return (
-    <PictureWall
+    <Galleries
       title={title}
       contents={contents}
     />

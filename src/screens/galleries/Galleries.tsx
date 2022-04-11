@@ -1,5 +1,5 @@
 import { ReactElement, useEffect } from 'react'
-import PictureWallClass from './PictureWall.module.scss'
+import GalleriesClass from './Galleries.module.scss'
 // hooks
 import { useScroll } from '../../hooks/useScroll';
 import { useSpring, animated } from 'react-spring';
@@ -32,7 +32,7 @@ export default function PictureWall({
 
   return (
     <>
-      <div className={PictureWallClass['container']}>
+      <div className={GalleriesClass['container']}>
         {/* 地图容器 */}
         <Map />
         {/* 照片容器 */}

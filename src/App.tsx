@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from 'react'
+import { ReactElement } from 'react'
 import {
   BrowserRouter,
   Routes,
@@ -17,8 +17,8 @@ interface Props {
 
 export default function Root({ }: Props): ReactElement {
   const routes: routesType = [
-    { name: 'HOME', path: '/home' },
-    { name: 'COFFEE', path: '/coffee' },
+    { name: 'HOME', icon: 'ra-wooden-sign', path: '/home' },
+    { name: 'COFFEE', icon: 'ra-coffee-mug', path: '/coffee' },
   ]
 
   return (

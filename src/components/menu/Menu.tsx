@@ -1,9 +1,11 @@
 import React, { ReactElement, useState } from 'react';
 import MenuClass from './Menu.module.scss';
 import '../../styles/iconfont/iconfont.css';
+import '../../styles/rpg-awesome/css/rpg-awesome.css';
 import { useSpring, animated } from 'react-spring';
+import classnames from 'classnames';
 
-type routeType = { name: string, path: string }
+type routeType = { name: string, icon: string, path: string }
 export declare type routesType = routeType[]
 interface MenuProps {
   routes?: routesType,
@@ -55,10 +57,13 @@ export default function Menu({ routes }: MenuProps): ReactElement {
         <animated.span className={MenuClass['menu-text']} style={{ ...hoverStyles }}>MENU</animated.span>
       </div>
       <animated.div className={MenuClass['menu-slider-container']} style={{ width: '200px', ...styles }}>
-        <ul style={{marginTop: '10px'}}>
+        <ul style={{ marginTop: '10px' }}>
           {
             routes?.map((route, idx) => (
-              <li key={idx}><a href={route.path}>{route.name}</a></li>
+              <li key={idx}>
+                <i className={classnames({ 'ra': true, ['ra-style']: true, [route.icon]: true })}></i>
+                <a href={route.path}>{route.name}</a>
+              </li>
             ))
           }
         </ul>

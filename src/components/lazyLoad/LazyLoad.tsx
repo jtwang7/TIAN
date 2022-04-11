@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect, useRef } from 'react'
 import { SRLWrapper } from 'simple-react-lightbox';
 import type { ImgsType } from './types';
+import ImageBox from './ImageBox';
 
 export interface LazyLoadProps {
   imgs: ImgsType,
@@ -41,7 +42,7 @@ export default function LazyLoad({
           position: 'relative',
         }}
       >
-        {imgs.map(({ alt, src }, idx) => (
+        {/* {imgs.map(({ alt, src }, idx) => (
           <div style={{ width: '25%', height: imgHeight, zIndex: '1', cursor: 'pointer' }}>
             <img
               key={idx}
@@ -51,6 +52,14 @@ export default function LazyLoad({
               data-src={src}
             />
           </div>
+        ))} */}
+        {imgs.map((img, idx) => (
+          <ImageBox
+            style={{width: '25%', height: imgHeight, zIndex: '1', cursor: 'pointer' }}
+            key={idx}
+            content={img}
+            ref={(element) => { refs.current.push(element!) }}
+          />
         ))}
       </div>
     </SRLWrapper>

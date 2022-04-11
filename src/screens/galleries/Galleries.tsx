@@ -4,7 +4,7 @@ import GalleriesClass from './Galleries.module.scss'
 import { useScroll } from '../../hooks/useScroll';
 import { useSpring, animated } from 'react-spring';
 // types
-import { ImgsType } from '../../components/lazyLoad/types';
+import type { ImgsType } from '../../components/lazyLoad/types';
 // components
 import LazyLoad from '../../components/lazyLoad/LazyLoad';
 import BackTop from '../../components/backTop/BackTop';

@@ -2,23 +2,37 @@ import { ReactElement, useEffect, useRef, useState } from 'react'
 import CarouselClass from './Carousel.module.scss'
 import CarouselItem from './CarouselItem'
 import _ from 'lodash';
+import { useSpring, animated } from 'react-spring';
+import { useHover } from '../../hooks/useHover';
 
 
-export declare type CarouselItemState = { src: string, title?: string, subTitle?: string }
+export declare type CarouselItemState = { 
+  src: string, 
+  title?: string, 
+  subTitle?: string,
+  buttonText?: string,
+}
 export type CarouselItems = ({ id: number } & CarouselItemState)[]
 export interface CarouselProps {
   images: CarouselItems,
-  auto?: boolean,
   interval?: number,
+  auto?: boolean,
+  showArrow?: boolean, // 是否始终显示箭头
 }
 
-export default function Carousel({ images, auto = true, interval = 5000 }: CarouselProps): ReactElement {
+export default function Carousel({ images, auto = true, showArrow = false, interval = 5000 }: CarouselProps): ReactElement {
   const hoverPixel = 80
   const [type, setType] = useState<'left' | 'right'>('right')
   const [pixel, setPixel] = useState<number>(0)
   const [carouselItems, setCarouselItems] = useState<CarouselItems>(images)
   const target = useRef<boolean>(false)
   const timer = useRef<NodeJS.Timer | null>(null)
+
+  // ARROW SPRING
+  const { isHover: isBoxHover, onMouseEnter: onBoxMouseEnter, onMouseLeave: onBoxMouseLeave } = useHover()
+  const arrowStyle = useSpring({
+    opacity: showArrow ? '1' : (isBoxHover ? '1' : '0')
+  })
 
   // AUTO PLAY
   const setAutoPlay = (auto: boolean): void | (() => void) => {
@@ -77,7 +91,7 @@ export default function Carousel({ images, auto = true, interval = 5000 }: Carou
       setPixel(document.body.clientWidth)
       setTimeout(() => {
         // !先重置pixel, 后更新数组
-        setPixel(0) 
+        setPixel(0)
         setCarouselItems(prev => {
           const current = _.cloneDeep(prev)
           const lastOne = current.pop()
@@ -98,27 +112,31 @@ export default function Carousel({ images, auto = true, interval = 5000 }: Carou
   }, [auto])
 
   return (
-    <div className={CarouselClass['carousel']}>
+    <div
+      className={CarouselClass['carousel']}
+      onMouseEnter={onBoxMouseEnter}
+      onMouseLeave={onBoxMouseLeave}
+    >
       {/* 左切换按钮 */}
-      <a
+      <animated.a
         className={`icon-container`}
-        style={{ width: `${hoverPixel}px`, left: '0px' }}
+        style={{ width: `${hoverPixel}px`, left: '0px', ...arrowStyle }}
         onMouseEnter={onMouseEnterByLeft}
         onMouseLeave={onMouseLeave}
         onClick={onClick}
       >
         <i className={`iconfont icon-left`}></i>
-      </a>
+      </animated.a>
       {/* 右切换按钮 */}
-      <a
+      <animated.a
         className={`icon-container`}
-        style={{ width: `${hoverPixel}px`, right: '0px' }}
+        style={{ width: `${hoverPixel}px`, right: '0px', ...arrowStyle }}
         onMouseEnter={onMouseEnterByRight}
         onMouseLeave={onMouseLeave}
         onClick={onClick}
       >
         <i className={`iconfont icon-right`}></i>
-      </a>
+      </animated.a>
       {/* 
         图片切换的逻辑：
         图片数组通过 map 生成对应组件 <CarouselItem />, 其中 index(z-index) 以数组索引为值传递。
@@ -136,6 +154,7 @@ export default function Carousel({ images, auto = true, interval = 5000 }: Carou
             zIndex={idx}
             title={item.title}
             subTitle={item.subTitle}
+            buttonText={item.buttonText}
             hoverPixel={hoverPixel}
             handleMouseEnter={() => { clearAutoPlay() }}
             handleMouseLeave={() => { setAutoPlay(auto) }}

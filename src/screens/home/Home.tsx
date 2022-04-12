@@ -21,24 +21,28 @@ function Home({ }: Props): ReactElement {
       src: Thor012,
       title: 'ABCDE',
       subTitle: 'abcde',
+      buttonText: 'TIAN',
     },
     {
       id: 1,
       src: Thor028,
       title: 'ABCDE',
       subTitle: 'abcde',
+      buttonText: 'TIAN',
     },
     {
       id: 2,
       src: Thor049,
       title: 'ABCDE',
       subTitle: 'abcde',
+      buttonText: 'TIAN',
     },
     {
       id: 3,
       src: Thor050,
       title: 'ABCDE',
       subTitle: 'abcde',
+      buttonText: 'TIAN',
     },
   ]
 

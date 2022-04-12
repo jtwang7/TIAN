@@ -21,6 +21,7 @@ export default function CarouselItem({
   hoverPixel,
   title = '',
   subTitle = '',
+  buttonText = '',
   handleMouseEnter = undefined,
   handleMouseLeave = undefined,
 }: CarouselItemProps & CarouselItemState): ReactElement {
@@ -50,7 +51,7 @@ export default function CarouselItem({
           <span className='title'>{title}</span>
         </div>
         <ButtonTypeOne
-          text='TIAN'
+          text={buttonText}
           onClick={() => { }}
           handleMouseEnter={handleMouseEnter}
           handleMouseLeave={handleMouseLeave}

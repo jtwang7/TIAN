@@ -2,16 +2,86 @@ import React, { ReactElement, useState } from 'react';
 import MenuClass from './Menu.module.scss';
 import '../../styles/iconfont/iconfont.css';
 import '../../styles/rpg-awesome/css/rpg-awesome.css';
-import { useSpring, animated } from 'react-spring';
 import classnames from 'classnames';
+// hooks
+import { useSpring, animated } from 'react-spring';
+import { useToggle } from '../../hooks/useToggle';
 
-type routeType = { name: string, icon: string, path: string }
+type routeType = { name: string, path: string, icon?: string, children?: routeType[] }
 export declare type routesType = routeType[]
+interface MenuItemProps {
+  route: routeType,
+  key?: number | string,
+}
 interface MenuProps {
   routes?: routesType,
 }
 
-export default function Menu({ routes }: MenuProps): ReactElement {
+
+function MenuItem({
+  route,
+  key,
+}: MenuItemProps): ReactElement {
+  const [isShow, showToggle] = useToggle(true)
+  const subMenuStyle = useSpring({
+    top: isShow ? '0px' : '-100px',
+  })
+
+  return (
+    (!route.children) ? (
+      <li key={`${key}`}>
+        <i className={classnames({ 'ra': true, ['ra-style']: true, [route.icon!]: true })}></i>
+        <a href={route.path}>{route.name}</a>
+      </li>
+    ) : (
+      <div
+        key={`${key}`}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          overflow: 'hidden',
+          position: 'relative',
+        }}
+      >
+        <li onClick={showToggle} style={{zIndex: '1'}}>
+          <a
+            href={'javascript: 0'}
+            style={{
+              marginLeft: '20px',
+              fontFamily: 'dtl_albertina_tregular',
+              fontWeight: 'normal',
+            }}
+          >{route.name}</a>
+          <i className={`iconfont icon-right drop-down`} ></i>
+        </li>
+        <animated.div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            width: '100%',
+            position: 'relative',
+            zIndex: '0',
+            ...subMenuStyle,
+          }}
+        >
+          {
+            route.children.map((item, idx) => (
+              <li key={`${key}-${idx}`}>
+                <i className={classnames({ 'ra': true, ['ra-style']: true, [item.icon!]: true })}></i>
+                <a href={item.path}>{item.name}</a>
+              </li>
+            ))
+          }
+        </animated.div>
+      </div>
+    )
+
+  )
+}
+
+function Menu({ routes }: MenuProps): ReactElement {
   const [isShow, setShow] = useState<boolean>(false)
   const onClose = () => { setShow(false) }
   const onOpen = () => { setShow(true) }
@@ -59,12 +129,7 @@ export default function Menu({ routes }: MenuProps): ReactElement {
       <animated.div className={MenuClass['menu-slider-container']} style={{ width: '200px', ...styles }}>
         <ul style={{ marginTop: '10px' }}>
           {
-            routes?.map((route, idx) => (
-              <li key={idx}>
-                <i className={classnames({ 'ra': true, ['ra-style']: true, [route.icon]: true })}></i>
-                <a href={route.path}>{route.name}</a>
-              </li>
-            ))
+            routes?.map((route, idx) => (<MenuItem route={route} key={idx} />))
           }
         </ul>
         <footer className={`footer`}>
@@ -80,3 +145,6 @@ export default function Menu({ routes }: MenuProps): ReactElement {
     </>
   )
 }
+
+
+export default Menu

@@ -42,10 +42,18 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 100%;
 
         .ra-style {
-          color: "#fff";
+          color: #fff;
           margin: 0 10px 0 20px;
+        }
+
+        .drop-down {
+          color: #fff;
+          margin: 0 20px 0 0;
+          transition: all .3s ease-in-out;
+          font-weight: normal;
         }
 
         a {
@@ -58,8 +66,12 @@
         &:hover {
           background: #fff;
           .ra-style,
+          .drop-down,
           a {
             color: #303030;
+          };
+          .drop-down {
+            transform: rotate(90deg);
           }
         }
       }

@@ -24,7 +24,7 @@ function MenuItem({
 }: MenuItemProps): ReactElement {
   const [isShow, showToggle] = useToggle(true)
   const subMenuStyle = useSpring({
-    top: isShow ? '0px' : '-100px',
+    top: isShow ? '0px' : '-100vh',
   })
 
   return (
@@ -41,7 +41,6 @@ function MenuItem({
           flexDirection: 'column',
           alignItems: 'flex-start',
           overflow: 'hidden',
-          position: 'relative',
         }}
       >
         <li onClick={showToggle} style={{zIndex: '1'}}>

@@ -1,3 +1,5 @@
+$background-color: #303030;
+
 .menu-btn-container {
   cursor: pointer;
   margin: 10px 10px;
@@ -21,7 +23,7 @@
 
 .menu-slider-container {
   height: 100vh;
-  background-color: #303030;
+  background-color: $background-color;
   color: #fff;
   position: fixed;
   left: 0;
@@ -38,6 +40,7 @@
       font-family: "ars_maquette_pro";
       font-weight: bold;
       li {
+        background-color: $background-color;
         cursor: pointer;
         display: flex;
         justify-content: center;

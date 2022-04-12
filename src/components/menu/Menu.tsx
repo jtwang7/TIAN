@@ -7,7 +7,12 @@ import classnames from 'classnames';
 import { useSpring, animated } from 'react-spring';
 import { useToggle } from '../../hooks/useToggle';
 
-type routeType = { name: string, path: string, icon?: string, children?: routeType[] }
+type routeType = {
+  name: string,
+  path: string,
+  icon?: string,
+  children?: routeType[],
+}
 export declare type routesType = routeType[]
 interface MenuItemProps {
   route: routeType,
@@ -43,7 +48,7 @@ function MenuItem({
           overflow: 'hidden',
         }}
       >
-        <li onClick={showToggle} style={{zIndex: '1'}}>
+        <li onClick={showToggle} style={{ zIndex: '1' }}>
           <a
             href={'javascript: 0'}
             style={{
@@ -52,7 +57,7 @@ function MenuItem({
               fontWeight: 'normal',
             }}
           >{route.name}</a>
-          <i className={`iconfont icon-right drop-down`} ></i>
+          <i className={`iconfont icon-right drop-down`} style={isShow ? {transform: 'rotate(90deg)'} : {}} ></i>
         </li>
         <animated.div
           style={{
@@ -62,6 +67,7 @@ function MenuItem({
             width: '100%',
             position: 'relative',
             zIndex: '0',
+            padding: '0 20px',
             ...subMenuStyle,
           }}
         >

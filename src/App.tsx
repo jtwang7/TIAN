@@ -25,23 +25,23 @@ export default function Root({ }: Props): ReactElement {
         { name: 'RESTAURANT', icon: 'ra-knife-fork', path: '/galleries/restaurant' },
       ]
     },
-    // { name: 'COFFEE', icon: 'ra-coffee-mug', path: '/coffee' },
-    // { name: 'RESTAURANT', icon: 'ra-knife-fork', path: '/restaurant' },
   ]
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<MainApp routes={routes} />}>
+          {/* 默认展示的内嵌组件 */}
           <Route index element={<Home />}></Route>
+          {/* 内嵌组件 */}
           <Route path='home' element={<Home />}></Route>
           <Route path='galleries/'>
+            {/* 默认展示的内嵌组件 */}
             <Route index element={<Restaurant />}></Route>
+            {/* 内嵌组件 */}
             <Route path='coffee' element={<Coffee />}></Route>
             <Route path='restaurant' element={<Restaurant />}></Route>
           </Route>
-          {/* <Route path='coffee' element={<Coffee />}></Route>
-          <Route path='restaurant' element={<Restaurant />}></Route> */}
         </Route>
         <Route></Route>
         <Route></Route>

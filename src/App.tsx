@@ -11,6 +11,7 @@ import MainApp from './screens/mainApp/MainApp';
 import Home from './screens/home/Home';
 import Coffee from './screens/galleries/coffee/Coffee';
 import Restaurant from './screens/galleries/restaurant/Restaurant';
+import Shopping from './screens/shopping/Shopping';
 
 interface Props {
 
@@ -25,23 +26,24 @@ export default function Root({ }: Props): ReactElement {
         { name: 'RESTAURANT', icon: 'ra-knife-fork', path: '/galleries/restaurant' },
       ]
     },
+    { name: 'SHOPPING', path: '/shopping', icon: 'ra-footprint' },
   ]
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<MainApp routes={routes} />}>
-          {/* 默认展示的内嵌组件 */}
+          {/* HOME */}
           <Route index element={<Home />}></Route>
-          {/* 内嵌组件 */}
           <Route path='home' element={<Home />}></Route>
+          {/* GALLERIES */}
           <Route path='galleries/'>
-            {/* 默认展示的内嵌组件 */}
             <Route index element={<Restaurant />}></Route>
-            {/* 内嵌组件 */}
             <Route path='coffee' element={<Coffee />}></Route>
             <Route path='restaurant' element={<Restaurant />}></Route>
           </Route>
+          {/* SHOPPING */}
+          <Route path='shopping' element={<Shopping />}></Route>
         </Route>
         <Route></Route>
         <Route></Route>

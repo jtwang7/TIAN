@@ -26,3 +26,8 @@ code {
   font-family: 'dtl_albertina_tregular';
   src: url(./fonts/DTL\ Albertina\ T\ Regular.otf);
 }
+
+@font-face {
+  font-family: 'georgia_pro';
+  src: url(./fonts/GeorgiaPro-Black.ttf);
+}

@@ -1,16 +1,20 @@
 import React, { ReactElement, useEffect, useMemo, useState } from 'react';
 import NoticeBarClass from './NoticeBar.module.scss';
 import { useTransition, animated } from 'react-spring';
+import type { ReactProps } from '../../types/baseTypes';
 
 export interface NoticeBarProps {
   contents: string | string[], // 播报内容
+  height?: number, // 框高
   interval?: number, // 轮播间隔
 }
 
 export default function NoticeBar({
   contents,
+  style,
+  height = 50,
   interval = 3000,
-}: NoticeBarProps): ReactElement {
+}: NoticeBarProps & ReactProps): ReactElement {
   // 播报内容数组
   const contentsArr = useMemo<string[]>(() => {
     let res: string[] = []
@@ -40,10 +44,6 @@ export default function NoticeBar({
     }
   }, [])
 
-  useEffect(() => {
-    console.log(index)
-  }, [index])
-
   // useTransition动画: 监听一个变量index，当变量发生变化时，触发动画
   const transitions = useTransition(index, {
     from: { left: '100vw' },
@@ -52,11 +52,11 @@ export default function NoticeBar({
   })
 
   return (
-    <div className={NoticeBarClass['container']}>
+    <div className={NoticeBarClass['container']} style={{ height: `${height}px`, ...style }}>
       {
         transitions((style, index) => (
           <animated.span
-            style={style}
+            style={{ lineHeight: `${height}px`, ...style }}
           >
             {contentsArr[index]}
           </animated.span>

@@ -46,9 +46,9 @@ export default function NoticeBar({
 
   // useTransition动画: 监听一个变量index，当变量发生变化时，触发动画
   const transitions = useTransition(index, {
-    from: { left: '100vw' },
-    enter: { left: '0vw' },
-    leave: { left: '-100vw' },
+    from: { left: '100vw', opacity: '0' },
+    enter: { left: '0vw', opacity: '1' },
+    leave: { left: '-100vw', opacity: '0' },
   })
 
   return (

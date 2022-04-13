@@ -1,0 +1,38 @@
+.section-one {
+  background-color: rgba(17, 17, 17, 0.247);
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  :global {
+    .logo {
+      width: 400px;
+      position: absolute;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
+.section-two {
+  background-color: #fff;
+  width: 100vw;
+  padding: 10px 10%;
+  box-sizing: border-box;
+  position: relative;
+  :global {
+    .title {
+      font-size: 40px;
+      font-family: 'right-on';
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    p {
+      margin-bottom: 30px;
+      text-align: center;
+      font-family: 'georgia_pro_light';
+      font-size: 20px;
+    }
+  }
+}

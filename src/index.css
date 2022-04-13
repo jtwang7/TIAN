@@ -29,5 +29,15 @@ code {
 
 @font-face {
   font-family: 'georgia_pro';
-  src: url(./fonts/GeorgiaPro-Black.ttf);
+  src: url(./fonts/GeorgiaPro-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: 'georgia_pro_light';
+  src: url(./fonts/GeorgiaPro-Light.ttf);
+}
+
+@font-face {
+  font-family: 'right-on';
+  src: url(./fonts/RighOn.otf);
 }

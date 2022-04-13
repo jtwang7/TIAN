@@ -1,3 +1,5 @@
+@use '../../styles/variable' as obj;
+
 .section-one {
   background-color: rgba(17, 17, 17, 0.247);
   width: 100vw;
@@ -15,7 +17,7 @@
 }
 
 .section-two {
-  background-color: #fff;
+  background-color: obj.$white;
   width: 100vw;
   padding: 10px 10%;
   box-sizing: border-box;
@@ -33,6 +35,40 @@
       text-align: center;
       font-family: 'georgia_pro_light';
       font-size: 20px;
+    }
+  }
+}
+
+.section-three {
+
+}
+
+.section-four {
+  width: 100vw;
+  position: relative;
+  background-color: obj.$white;
+  :global {
+    .head-bar {
+      border-bottom: .7px solid obj.$light-black;
+      height: 50px;
+    }
+
+    .body-area {
+      .title {
+        text-transform: uppercase;
+        font-family: 'right-on';
+        text-align: center;
+        height: 120px;
+        line-height: 120px;
+        font-size: 40px;
+      }
+
+      .goods-area {
+        box-sizing: border-box;
+        display: flex;
+        flex-wrap: wrap;
+        
+      }
     }
   }
 }

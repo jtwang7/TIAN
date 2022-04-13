@@ -19,13 +19,14 @@ export default function Shopping({ }: Props): ReactElement {
 
 
   const image1 = 'https://picsum.photos/1500/1500?random=1'
+  const image2 = 'https://picsum.photos/1500/1500?random=2'
   return (
     <>
       <NoticeBar contents={noticeInfos} style={{ zIndex: 1 }} interval={5000} height={60} />
       <Parallax
         bgImage={image1}
         bgImageAlt="random image"
-        strength={-200}
+        strength={-200} // strength定义背景移动像素值, 正值向下移动, 负值向上移动, 若值和嵌套元素高度相同, 则视觉上不发生移动
       >
         <div className={ShoppingClass['section-one']}>
           <img className='logo' alt='logo' src={Logo} />
@@ -39,9 +40,9 @@ export default function Shopping({ }: Props): ReactElement {
         <p><em>-The TIAN Family</em></p>
       </article>
       <Parallax
-        bgImage={image1}
+        bgImage={image2}
         bgImageAlt="random image"
-        strength={-200}
+        strength={-300}
       >
         <div
           style={{
@@ -49,10 +50,19 @@ export default function Shopping({ }: Props): ReactElement {
             height: '100vh',
             position: 'relative',
           }}
+          className={ShoppingClass['section-three']}
         >
-
         </div>
       </Parallax>
+      <article className={ShoppingClass['section-four']}>
+        <header className={`head-bar`}></header>
+        <section className={`body-area`}>
+          <h2 className={`title`}>curated homemade goods</h2>
+          <section className={`goods-area`}>
+            
+          </section>
+        </section>
+      </article>
     </>
   )
 }

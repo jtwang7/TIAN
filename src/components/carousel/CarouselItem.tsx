@@ -1,17 +1,9 @@
 import { ReactElement, useEffect } from 'react'
 import CarouselItemClass from './CarouselItem.module.scss'
-import type { CarouselItemState } from './Carousel'
 import { useSpring, animated, easings } from 'react-spring';
 import ButtonTypeOne from '../button/typeOne/TypeOne';
-
-export interface CarouselItemProps {
-  pixel: number,
-  type: 'left' | 'right',
-  zIndex: number,
-  hoverPixel: number,
-  handleMouseEnter?: any,
-  handleMouseLeave?: any,
-}
+// types
+import type { CarouselItemProps, CarouselItemState } from './types';
 
 export default function CarouselItem({
   src,
@@ -50,19 +42,23 @@ export default function CarouselItem({
           <span className='sub-title'>{subTitle}</span>
           <span className='title'>{title}</span>
         </div>
-        <ButtonTypeOne
-          text={buttonText}
-          onClick={() => { }}
-          handleMouseEnter={handleMouseEnter}
-          handleMouseLeave={handleMouseLeave}
-          style={{
-            bottom: '35%',
-            margin: '0 auto',
-            left: '0px',
-            right: '0px',
-            zIndex: 2,
-          }}
-        />
+        {
+          buttonText ? (
+            <ButtonTypeOne
+              text={buttonText}
+              onClick={() => { }}
+              handleMouseEnter={handleMouseEnter}
+              handleMouseLeave={handleMouseLeave}
+              style={{
+                bottom: '35%',
+                margin: '0 auto',
+                left: '0px',
+                right: '0px',
+                zIndex: 2,
+              }}
+            />
+          ) : null
+        }
       </animated.div>
     </div>
   )

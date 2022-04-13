@@ -12,6 +12,8 @@ code {
     monospace;
 }
 
+@import '~antd/dist/antd.css';
+
 @font-face {
   font-family: 'beauty-demo';
   src: url(./fonts/BeautyDemo.ttf);

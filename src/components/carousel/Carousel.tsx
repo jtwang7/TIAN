@@ -4,23 +4,15 @@ import CarouselItem from './CarouselItem'
 import _ from 'lodash';
 import { useSpring, animated } from 'react-spring';
 import { useHover } from '../../hooks/useHover';
+// types
+import type { CarouselProps, CarouselItems } from './types';
 
-
-export declare type CarouselItemState = { 
-  src: string, 
-  title?: string, 
-  subTitle?: string,
-  buttonText?: string,
-}
-export type CarouselItems = ({ id: number } & CarouselItemState)[]
-export interface CarouselProps {
-  images: CarouselItems,
-  interval?: number,
-  auto?: boolean,
-  showArrow?: boolean, // 是否始终显示箭头
-}
-
-export default function Carousel({ images, auto = true, showArrow = false, interval = 5000 }: CarouselProps): ReactElement {
+export default function Carousel({
+  images,
+  auto = true,
+  showArrow = false,
+  interval = 5000,
+}: CarouselProps): ReactElement {
   const hoverPixel = 80
   const [type, setType] = useState<'left' | 'right'>('right')
   const [pixel, setPixel] = useState<number>(0)

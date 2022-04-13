@@ -27,3 +27,7 @@ export declare interface PositionProps {
   right: number | string,
   bottom: number | string,
 }
+
+// 类型重写(覆盖)
+// 将P中所有与S键相关的属性过滤，然后用S重新写入
+export type Override<P, S> = Omit<P, keyof S> & S

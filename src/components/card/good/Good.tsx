@@ -1,10 +1,11 @@
-import React, { ReactElement, useMemo } from 'react'
+import { ReactElement, useRef } from 'react'
 import GoodClass from './Good.module.scss';
 // components
 import { Carousel } from 'antd';
 // types
-import type { ReactProps, SizeProps, Override } from '../../types/baseTypes';
+import type { ReactProps, SizeProps, Override } from '../../../types/baseTypes';
 import type { GoodType } from './types';
+import type { CarouselRef } from 'antd/lib/carousel';
 
 interface Props {
   good: GoodType, // 商品
@@ -17,14 +18,20 @@ export default function Good({
   width,
   style,
 }: GoodProps): ReactElement {
+  const carouselRef = useRef<CarouselRef>(null!)
+  const onMouseEnter = () => { carouselRef.current.next() }
   return (
-    <div className={GoodClass.container} style={{...style, width: `${width}px`}}>
-      <div className={`carousel-container`}>
+    <div className={GoodClass.container} style={{ ...style, width: `${width}px` }}>
+      <div
+        className={`carousel-container`}
+        onMouseEnter={onMouseEnter}
+      >
         <Carousel
           effect='fade'
           autoplay={false}
           dotPosition='bottom'
           dots={true}
+          ref={carouselRef}
         >
           {
             good.imgsUrl.map((url, idx) => (
@@ -40,7 +47,7 @@ export default function Good({
       </div>
       <p>{good.name}</p>
       <p>{`RMB ${good.price}`}</p>
-      {good.nums ? (<div className={`sold-out`}>Sold Out</div>) : null}
+      {!good.nums ? (<div className={`sold-out`}>Sold Out</div>) : null}
     </div>
   )
 }

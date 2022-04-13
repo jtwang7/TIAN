@@ -6,6 +6,8 @@ import classnames from 'classnames';
 // hooks
 import { useSpring, animated } from 'react-spring';
 import { useToggle } from '../../hooks/useToggle';
+// types
+import { ReactProps } from '../../types/baseTypes';
 
 type routeType = {
   name: string,
@@ -86,7 +88,7 @@ function MenuItem({
   )
 }
 
-function Menu({ routes }: MenuProps): ReactElement {
+function Menu({ routes, style }: MenuProps & ReactProps): ReactElement {
   const [isShow, setShow] = useState<boolean>(false)
   const onClose = () => { setShow(false) }
   const onOpen = () => { setShow(true) }
@@ -115,6 +117,7 @@ function Menu({ routes }: MenuProps): ReactElement {
     <>
       <div
         className={MenuClass['menu-btn-container']}
+        style={style}
         onClick={onOpen}
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}

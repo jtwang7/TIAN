@@ -68,6 +68,14 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-around;
+
+        .good-card {
+          &::after {
+            display: block;
+            content: '';
+            height: 60px;
+          }
+        }
       }
     }
   }

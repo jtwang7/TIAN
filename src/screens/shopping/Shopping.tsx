@@ -3,88 +3,22 @@ import Logo from './logo.png';
 import ShoppingClass from './Shopping.module.scss';
 // components
 import { Parallax } from 'react-parallax';
-import NoticeBar from '../../components/noticeBar/NoticeBar';
-import Good from '../../components/card/Good';
-// types
-import type { GoodType } from '../../components/card/types';
+import CardGood from '../../components/card/good/Good';
+// hooks
+import { useAppSelector } from '../../app/store';
 
 interface Props {
 
 }
 
 export default function Shopping({ }: Props): ReactElement {
-  const noticeInfos: string[] = [
-    'Thank you for your support of our small family business!',
-    'To talk health, happiness,and prosperity to every person you meet.',
-    'Laughter is always open, youth is always there.',
-    'All things are difficult before they are easy.',
-  ]
-
-
   const image1 = 'https://picsum.photos/1500/1500?random=1'
   const image2 = 'https://picsum.photos/1500/1500?random=2'
 
-  const goods: GoodType[] = [{
-    id: 0, // 商品编号
-    name: '曲奇', // 商品名称
-    imgsUrl: [
-      'https://picsum.photos/200/300?random=1',
-      'https://picsum.photos/200/300?random=2',
-      'https://picsum.photos/200/300?random=3',
-    ], // 商品图片地址
-    price: 10, // 价格
-    nums: 0, // 库存
-    desc: '', // 商品描述
-    comment: ['abc', 'defg'], // 评论
-    score: 4.7, // 评分
-    likes: 3, // 喜好数目
-  }, {
-    id: 1, // 商品编号
-    name: '曲奇', // 商品名称
-    imgsUrl: [
-      'https://picsum.photos/200/300?random=11',
-      'https://picsum.photos/200/300?random=12',
-      'https://picsum.photos/200/300?random=13',
-    ], // 商品图片地址
-    price: 10, // 价格
-    nums: 0, // 库存
-    desc: '', // 商品描述
-    comment: ['abc', 'defg'], // 评论
-    score: 4.7, // 评分
-    likes: 3, // 喜好数目
-  }, {
-    id: 2, // 商品编号
-    name: '曲奇', // 商品名称
-    imgsUrl: [
-      'https://picsum.photos/200/300?random=4',
-      'https://picsum.photos/200/300?random=5',
-      'https://picsum.photos/200/300?random=6',
-    ], // 商品图片地址
-    price: 10, // 价格
-    nums: 0, // 库存
-    desc: '', // 商品描述
-    comment: ['abc', 'defg'], // 评论
-    score: 4.7, // 评分
-    likes: 3, // 喜好数目
-  }, {
-    id: 3, // 商品编号
-    name: '曲奇', // 商品名称
-    imgsUrl: [
-      'https://picsum.photos/200/300?random=7',
-      'https://picsum.photos/200/300?random=8',
-      'https://picsum.photos/200/300?random=9',
-    ], // 商品图片地址
-    price: 10, // 价格
-    nums: 0, // 库存
-    desc: '', // 商品描述
-    comment: ['abc', 'defg'], // 评论
-    score: 4.7, // 评分
-    likes: 3, // 喜好数目
-  }]
+  const { goods } = useAppSelector(state => (state.shop))
 
   return (
     <>
-      <NoticeBar contents={noticeInfos} style={{ zIndex: 1 }} interval={5000} height={60} />
       <Parallax
         bgImage={image1}
         bgImageAlt="random image"
@@ -122,7 +56,9 @@ export default function Shopping({ }: Props): ReactElement {
           <h2 className={`title`}>curated homemade goods</h2>
           <section className={`goods-area`}>
             {goods.map(good => (
-              <Good good={good} key={good.id} width={300} />
+              <div className={`good-card`}>
+                <CardGood good={good} key={good.id} width={300} />
+              </div>
             ))}
           </section>
         </section>

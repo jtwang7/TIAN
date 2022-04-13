@@ -8,6 +8,7 @@ import type { routesType } from '../../components/menu/Menu';
 import { Outlet } from 'react-router-dom';
 import Menu from '../../components/menu/Menu';
 import Loading from '../../components/loading/Loading';
+import NoticeBar from '../../components/noticeBar/NoticeBar';
 
 interface MainAppProps {
   routes: routesType,
@@ -26,16 +27,28 @@ export default function MainApp({
     }, 2000)
   }, [location])
 
+  // 通告栏内容
+  const noticeInfos: string[] = [
+    'Thank you for your support of our small family business!',
+    'To talk health, happiness,and prosperity to every person you meet.',
+    'Laughter is always open, youth is always there.',
+    'All things are difficult before they are easy.',
+  ]
+
   return (
     <>
       {isLoading && <Loading />}
       <div className={MainAppClass['main-app-container']}>
         <Outlet />
-        <Menu routes={routes} />
-        <nav className='nav-content'>
-          <a href="http://wangjintian.com" className='a1'>LIFE IN TIAN‘s Blog.com</a>
-          <a className='a2'>LIFE PHOTOGRAPHY BY WANG JINTIAN</a>
-        </nav>
+        <section>
+          <NoticeBar contents={noticeInfos} style={{ position: 'fixed' }} interval={5000} height={60} />
+          <Menu routes={routes} />
+          <nav className='nav-content' >
+            <a href="http://wangjintian.com" className='a1'>LIFE IN TIAN‘s Blog.com</a>
+            <a className='a2'>LIFE PHOTOGRAPHY BY WANG JINTIAN</a>
+          </nav>
+        </section>
+
       </div>
     </>
   )

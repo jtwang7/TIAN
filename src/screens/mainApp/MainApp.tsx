@@ -1,5 +1,3 @@
-import { ReactElement, useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import MainAppClass from './MainApp.module.scss';
 // types
 import type { ReactProps } from '../../types/baseTypes';
@@ -9,6 +7,11 @@ import { Outlet } from 'react-router-dom';
 import Menu from '../../components/menu/Menu';
 import Loading from '../../components/loading/Loading';
 import NoticeBar from '../../components/noticeBar/NoticeBar';
+import BackTop from '../../components/backTop/BackTop';
+// hooks
+import { ReactElement, useState, useEffect } from 'react';
+import { useScroll } from '../../hooks/useScroll';
+import { useLocation } from 'react-router-dom';
 
 interface MainAppProps {
   routes: routesType,
@@ -26,6 +29,9 @@ export default function MainApp({
       setLoading(false)
     }, 2000)
   }, [location])
+
+  // 滚动hook
+  const isShow = useScroll(80)
 
   // 通告栏内容
   const noticeInfos: string[] = [
@@ -48,7 +54,8 @@ export default function MainApp({
             <a className='a2'>LIFE PHOTOGRAPHY BY WANG JINTIAN</a>
           </nav>
         </section>
-
+        {/* Back to Top */}
+        <BackTop isShow={isShow} />
       </div>
     </>
   )

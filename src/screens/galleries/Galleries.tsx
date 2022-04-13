@@ -7,7 +7,6 @@ import { useSpring, animated } from 'react-spring';
 import type { ImgsType } from '../../components/lazyLoad/types';
 // components
 import LazyLoad from '../../components/lazyLoad/LazyLoad';
-import BackTop from '../../components/backTop/BackTop';
 import Map from '../../components/map/Map'
 
 
@@ -49,8 +48,6 @@ export default function PictureWall({
             {contents && <LazyLoad imgs={contents} />}
           </div>
         </section>
-        {/* Back to Top */}
-        <BackTop isShow={isShow} />
       </div>
     </>
   )

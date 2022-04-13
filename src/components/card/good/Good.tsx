@@ -18,7 +18,9 @@ export default function Good({
   width,
   style,
 }: GoodProps): ReactElement {
+  // antd-Carousel实例
   const carouselRef = useRef<CarouselRef>(null!)
+  // Hover Carousel切换至下一张图
   const onMouseEnter = () => { carouselRef.current.next() }
   return (
     <div className={GoodClass.container} style={{ ...style, width: `${width}px` }}>

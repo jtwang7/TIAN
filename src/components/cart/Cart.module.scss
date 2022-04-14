@@ -1,0 +1,15 @@
+@use '../../styles/variable' as obj;
+
+.product-info {
+  width: 150px;
+  display: flex;
+  align-items: flex-start;
+
+  :global {
+    .img-style {
+      aspect-ratio: obj.$img-aspect-ratio;
+      object-fit: cover;
+      width: 100%;
+    }
+  }
+}

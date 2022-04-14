@@ -6,9 +6,10 @@ import { Parallax } from 'react-parallax';
 import CardGood from '../../components/card/good/Good';
 import CardProduct from '../../components/card/product/Product';
 import ButtonTypeOne from '../../components/button/typeOne/TypeOne';
+import Cart from '../../components/cart/Cart';
 // hooks
 import { useAppSelector, useAppDispatch } from '../../app/store';
-import { selectProduct } from '../../app/slices/shopSlice';
+import { selectProduct, addToCart } from '../../app/slices/shopSlice';
 // types
 import type { GoodType } from '../../components/card/good/types';
 
@@ -22,6 +23,8 @@ export default function Shopping({ }: Props): ReactElement {
 
   const { productId, goods } = useAppSelector(state => (state.shop))
   const dispatch = useAppDispatch()
+  // 购物车可视状态
+  const [cartVisible, setCartVisible] = useState(false)
 
   const cardProductRef = useRef<HTMLDivElement>(null)
 
@@ -37,6 +40,12 @@ export default function Shopping({ }: Props): ReactElement {
     })
   }
 
+  // add to cart
+  const handleAddToCart = (id: number): void => {
+    setCartVisible(true) // 弹出购物车
+    dispatch(addToCart(id)) // 添加商品进入购物车
+  }
+
   // 当前被选中的商品
   const [good, setGood] = useState<GoodType | null>(null)
   useEffect(() => {
@@ -48,6 +57,7 @@ export default function Shopping({ }: Props): ReactElement {
 
   return (
     <>
+      <Cart visible={cartVisible} onClose={() => { setCartVisible(false) }} />
       <Parallax
         bgImage={image1}
         bgImageAlt="random image"
@@ -104,23 +114,42 @@ export default function Shopping({ }: Props): ReactElement {
             className={ShoppingClass['section-five']}
             ref={cardProductRef}
           >
-            <CardProduct imgsUrl={good.imgsUrl!} />
+            <CardProduct imgsUrl={good.imgsUrl!} dots={false} />
             <div className={`product-info`}>
               <h2 className={`product-name`}>{good.name}</h2>
               <span className={`price`}>{`RMB ${good.price}`}</span>
               <div className={`sperator`}></div>
               <p className={`product-desc`}>{good.desc}</p>
-              <ButtonTypeOne
-                mode='light'
-                text={'add to cart'}
-                style={{
-                  textTransform: 'uppercase',
-                  width: '100%',
-                  margin: '10px auto',
-                  position: 'relative',
-                  inset: '0',
-                }}
-              />
+              {
+                good.nums ? (
+                  <ButtonTypeOne
+                    mode='light'
+                    text={'add to cart'}
+                    style={{
+                      textTransform: 'uppercase',
+                      width: '100%',
+                      margin: '10px auto',
+                      position: 'relative',
+                      inset: '0',
+                    }}
+                    onClick={() => { handleAddToCart(good.id) }}
+                  />
+                ) : (
+                  <ButtonTypeOne
+                    mode='light'
+                    text={'sold out'}
+                    style={{
+                      textTransform: 'uppercase',
+                      width: '100%',
+                      margin: '10px auto',
+                      position: 'relative',
+                      inset: '0',
+                      cursor: 'not-allowed',
+                    }}
+                  />
+                )
+              }
+
             </div>
           </div>
         ) : null

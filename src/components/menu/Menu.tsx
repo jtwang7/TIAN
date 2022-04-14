@@ -1,4 +1,4 @@
-import React, { ReactElement, useRef,useMemo, useState, useEffect } from 'react';
+import { ReactElement, useRef,useMemo, useState, useEffect } from 'react';
 import MenuClass from './Menu.module.scss';
 import '../../styles/iconfont/iconfont.css';
 import '../../styles/rpg-awesome/css/rpg-awesome.css';
@@ -8,6 +8,8 @@ import { useSpring, animated } from 'react-spring';
 import { useToggle } from '../../hooks/useToggle';
 // types
 import { ReactProps } from '../../types/baseTypes';
+// components
+import CancelButton from '../cacelButton/CancelButton';
 
 export type routeType = {
   name: string,
@@ -115,18 +117,6 @@ function Menu({ routes, style }: MenuProps & ReactProps): ReactElement {
   const hoverIconStyles = useSpring({ rotate: isHover ? '90deg' : '0' })
   const hoverStyles = useSpring({ color: isHover ? '#D3FF7C' : '#fff' })
 
-  const [isCancelHover, setCancelHover] = useState<boolean>(false)
-  const onCancelMouseEnter = () => { setCancelHover(true) }
-  const onCancelMouseLeave = () => { setCancelHover(false) }
-  const hoverCancelStyles = useSpring({
-    to: {
-      rotate: isCancelHover ? '360deg' : '0deg',
-    },
-    duration: 2000,
-    reverse: true,
-    reset: true,
-  })
-
   return (
     <>
       <div
@@ -155,13 +145,7 @@ function Menu({ routes, style }: MenuProps & ReactProps): ReactElement {
           }
         </ul>
         <footer className={`footer`}>
-          <animated.i
-            className={`iconfont icon-cancel`}
-            onClick={onClose}
-            onMouseEnter={onCancelMouseEnter}
-            onMouseLeave={onCancelMouseLeave}
-            style={{ fontSize: '20px', ...hoverCancelStyles }}
-          ></animated.i>
+          <CancelButton onClose={onClose} />
         </footer>
       </animated.div>
     </>

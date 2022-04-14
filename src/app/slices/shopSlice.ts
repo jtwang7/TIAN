@@ -58,7 +58,7 @@ const goods: GoodType[] = [{
   score: 4.7, // 评分
   likes: 3, // 喜好数目
 }, {
-  id: 0, // 商品编号
+  id: 4, // 商品编号
   name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=1',
@@ -72,7 +72,7 @@ const goods: GoodType[] = [{
   score: 4.7, // 评分
   likes: 3, // 喜好数目
 }, {
-  id: 1, // 商品编号
+  id: 5, // 商品编号
   name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=11',
@@ -86,7 +86,7 @@ const goods: GoodType[] = [{
   score: 4.7, // 评分
   likes: 3, // 喜好数目
 }, {
-  id: 2, // 商品编号
+  id: 6, // 商品编号
   name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=4',
@@ -100,7 +100,7 @@ const goods: GoodType[] = [{
   score: 4.7, // 评分
   likes: 3, // 喜好数目
 }, {
-  id: 3, // 商品编号
+  id: 7, // 商品编号
   name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=7',
@@ -115,13 +115,22 @@ const goods: GoodType[] = [{
   likes: 3, // 喜好数目
 },]
 
+export type CartOrder = { 
+  id: number, // 商品唯一标签
+  nums: number, // 商品数
+  order: number, // 商品添加进入购物车的顺序
+  remark?: string, // 商品额外购物备注 
+}
+
 // store仓库初始值
 const initialState: {
   productId: number, // 当前所选商品id
   goods: GoodType[], // 商品信息
+  cartOrders: CartOrder[], // 购物车订单
 } = {
   productId: -1,
   goods,
+  cartOrders: [],
 }
 
 const shopSlice = createSlice({
@@ -131,10 +140,26 @@ const shopSlice = createSlice({
     // 选择商品
     selectProduct: (state, action) => {
       state.productId = action.payload
-      return state
+    },
+    // 添加商品进入购物车
+    addToCart: (state, action) => {
+      const ids: number[] = []
+      const orders: number[] = []
+      for (let item of state.cartOrders) {
+        ids.push(item.id)
+        orders.push(item.order)
+      }
+      const curMaxOrder = Math.max(...orders) || 0
+      if (!ids.includes(action.payload)) {
+        state.cartOrders.push({
+          id: action.payload,
+          order: curMaxOrder + 1,
+          nums: 1,
+        })
+      }
     }
   }
 })
 
 export default shopSlice
-export const { selectProduct } = shopSlice.actions
+export const { selectProduct, addToCart } = shopSlice.actions

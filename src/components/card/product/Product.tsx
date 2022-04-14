@@ -1,8 +1,8 @@
 import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import ProductClass from './Product.module.scss';
 import { Carousel } from 'antd';
-import type { CarouselRef } from 'antd/lib/carousel';
-import { ReactProps } from '../../../types/baseTypes';
+import type { CarouselRef, CarouselProps } from 'antd/lib/carousel';
+import type { ReactProps } from '../../../types/baseTypes';
 
 interface Props {
   imgsUrl: string[],
@@ -10,9 +10,10 @@ interface Props {
   mainWidth?: number,
 }
 
-const Product = React.forwardRef<HTMLDivElement, Props & ReactProps>(function ({
+const Product = React.forwardRef<HTMLDivElement, Props & ReactProps & CarouselProps>(function ({
   imgsUrl,
   style,
+  dots = true,
   thumbnailWidth = 100,
   mainWidth = 650,
 }, ref): ReactElement {
@@ -43,7 +44,7 @@ const Product = React.forwardRef<HTMLDivElement, Props & ReactProps>(function ({
           effect='fade'
           autoplay={false}
           dotPosition='bottom'
-          dots={true}
+          dots={dots}
           ref={carouselRef}
         >
           {

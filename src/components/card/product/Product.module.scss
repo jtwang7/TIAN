@@ -1,0 +1,31 @@
+@use '../../../styles/variable' as obj;
+
+.container {
+  display: flex;
+  align-items: flex-start;
+
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+
+  :global {
+    .thumbnail-container {
+      display: flex;
+      flex-direction: column;
+      width: 100px;
+      margin-right: 10px;
+
+      .thumbnail-content {
+        aspect-ratio: obj.$img-aspect-ratio;
+        margin-bottom: 10px;
+        cursor: pointer;
+      }
+    }
+
+    .main-image {
+      width: 300px;
+      aspect-ratio: obj.$img-aspect-ratio;
+    }
+  }
+}

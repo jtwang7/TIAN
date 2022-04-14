@@ -4,6 +4,7 @@ import ShoppingClass from './Shopping.module.scss';
 // components
 import { Parallax } from 'react-parallax';
 import CardGood from '../../components/card/good/Good';
+import Product from '../../components/card/product/Product';
 // hooks
 import { useAppSelector, useAppDispatch } from '../../app/store';
 import { selectProduct } from '../../app/slices/shopSlice';
@@ -76,9 +77,7 @@ export default function Shopping({ }: Props): ReactElement {
       {/* 购物详情块 */}
       {
         (productId !== -1) ? (
-          <div>
-            123
-          </div>
+          <Product imgsUrl={goods.find((good) => (good.id === productId))?.imgsUrl!} />
         ) : null
       }
     </>

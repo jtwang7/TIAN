@@ -109,8 +109,18 @@ export default function Shopping({ }: Props): ReactElement {
               <h2 className={`product-name`}>{good.name}</h2>
               <span className={`price`}>{`RMB ${good.price}`}</span>
               <div className={`sperator`}></div>
-              <ButtonTypeOne mode='light' text={'add to cart'} style={{ textTransform: 'uppercase' }} />
-              <p>{good.desc}</p>
+              <p className={`product-desc`}>{good.desc}</p>
+              <ButtonTypeOne
+                mode='light'
+                text={'add to cart'}
+                style={{
+                  textTransform: 'uppercase',
+                  width: '100%',
+                  margin: '10px auto',
+                  position: 'relative',
+                  inset: '0',
+                }}
+              />
             </div>
           </div>
         ) : null

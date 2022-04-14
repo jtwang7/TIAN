@@ -11,7 +11,7 @@ const goods: GoodType[] = [{
   ], // 商品图片地址
   price: 10, // 价格
   nums: 0, // 库存
-  desc: '', // 商品描述
+  desc: 'Our Chef’s Scoop is so much more than just a coffee scoop. Use this hand carved spoon to measure out brown sugar for your secret-recipe sauce, keep it in your rolled oats canister, or use it to scoop orzo into a pot of boiling water. This artisan kitchen utensil will look strikingly beautiful on your countertop, and will be right at home with your hand-thrown pottery, copper saucepans and gourmet cookbooks.', // 商品描述
   comment: ['abc', 'defg'], // 评论
   score: 4.7, // 评分
   likes: 3, // 喜好数目

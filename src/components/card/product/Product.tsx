@@ -14,7 +14,7 @@ const Product = React.forwardRef<HTMLDivElement, Props & ReactProps>(function ({
   imgsUrl,
   style,
   thumbnailWidth = 100,
-  mainWidth = 700,
+  mainWidth = 650,
 }, ref): ReactElement {
   const [id, setId] = useState<number>(0)
   const onClick = (id: number): void => { setId(id) }

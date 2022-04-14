@@ -38,6 +38,8 @@ $background-color: #303030;
       list-style-type: none;
       font-family: "ars_maquette_pro";
       font-weight: bold;
+      position: relative;
+
       li {
         background-color: $background-color;
         cursor: pointer;

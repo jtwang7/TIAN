@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from 'react';
+import React, { ReactElement, useRef,useMemo, useState, useEffect } from 'react';
 import MenuClass from './Menu.module.scss';
 import '../../styles/iconfont/iconfont.css';
 import '../../styles/rpg-awesome/css/rpg-awesome.css';
@@ -9,7 +9,7 @@ import { useToggle } from '../../hooks/useToggle';
 // types
 import { ReactProps } from '../../types/baseTypes';
 
-type routeType = {
+export type routeType = {
   name: string,
   path: string,
   icon?: string,
@@ -33,6 +33,18 @@ function MenuItem({
   const subMenuStyle = useSpring({
     top: isShow ? '0px' : '-100vh',
   })
+
+  // 获取subMenuItem实例
+  const subItemRef = useRef<HTMLDivElement>(null!)
+  // 获取subMenuItem高度
+  const subItemHeight = useMemo(() => {
+    return subItemRef.current?.offsetHeight
+  }, [subItemRef.current])
+  useEffect(() => {
+    if (subItemHeight) {
+      subItemRef.current.style.setProperty('height', isShow ? `${subItemHeight}px` : `0px`)
+    }
+  }, [isShow, subItemHeight])
 
   return (
     (!route.children) ? (
@@ -59,9 +71,10 @@ function MenuItem({
               fontWeight: 'normal',
             }}
           >{route.name}</a>
-          <i className={`iconfont icon-right drop-down`} style={isShow ? {transform: 'rotate(90deg)'} : {}} ></i>
+          <i className={`iconfont icon-right drop-down`} style={isShow ? { transform: 'rotate(90deg)' } : {}} ></i>
         </li>
         <animated.div
+          ref={subItemRef}
           style={{
             display: 'flex',
             flexDirection: 'column',
@@ -70,6 +83,7 @@ function MenuItem({
             position: 'relative',
             zIndex: '0',
             padding: '0 20px',
+            transition: 'height .3s ease-in-out',
             ...subMenuStyle,
           }}
         >

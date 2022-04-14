@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useRef, useState } from 'react';
+import React, { ReactElement, useEffect, useRef, useState } from 'react';
 import ProductClass from './Product.module.scss';
 import { Carousel } from 'antd';
 import type { CarouselRef } from 'antd/lib/carousel';
@@ -10,12 +10,12 @@ interface Props {
   mainWidth?: number,
 }
 
-export default function Product({
+const Product = React.forwardRef<HTMLDivElement, Props & ReactProps>(function ({
   imgsUrl,
   style,
   thumbnailWidth = 100,
   mainWidth = 700,
-}: Props & ReactProps): ReactElement {
+}, ref): ReactElement {
   const [id, setId] = useState<number>(0)
   const onClick = (id: number): void => { setId(id) }
   // antd-Carousel实例
@@ -24,8 +24,8 @@ export default function Product({
   useEffect(() => { carouselRef.current.goTo(id) }, [id])
 
   return (
-    <div className={ProductClass.container} style={style}>
-      <div className={'thumbnail-container'} style={{width: `${thumbnailWidth}px`}}>
+    <div className={ProductClass.container} style={style} ref={ref}>
+      <div className={'thumbnail-container'} style={{ width: `${thumbnailWidth}px` }}>
         {
           imgsUrl.map((url, idx) => (
             <img
@@ -33,12 +33,12 @@ export default function Product({
               src={url}
               className={`thumbnail-content`}
               onClick={() => { onClick(idx) }}
-              style={{border: (idx === id) ? '2px solid #323232' : ''}}
+              style={{ border: (idx === id) ? '2px solid #323232' : '' }}
             />
           ))
         }
       </div>
-      <div className={'main-image'} style={{width: `${mainWidth}px`}}>
+      <div className={'main-image'} style={{ width: `${mainWidth}px` }}>
         <Carousel
           effect='fade'
           autoplay={false}
@@ -59,4 +59,6 @@ export default function Product({
       </div>
     </div>
   )
-}
+})
+
+export default Product

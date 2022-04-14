@@ -8,6 +8,7 @@ $height: 50px;
   overflow: hidden;
   position: absolute;
   top: 0;
+  z-index: 999;
 
   span {
     width: 100vw;

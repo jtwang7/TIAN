@@ -1,13 +1,16 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useRef, useState } from 'react';
 import Logo from './logo.png';
 import ShoppingClass from './Shopping.module.scss';
 // components
 import { Parallax } from 'react-parallax';
 import CardGood from '../../components/card/good/Good';
-import Product from '../../components/card/product/Product';
+import CardProduct from '../../components/card/product/Product';
+import ButtonTypeOne from '../../components/button/typeOne/TypeOne';
 // hooks
 import { useAppSelector, useAppDispatch } from '../../app/store';
 import { selectProduct } from '../../app/slices/shopSlice';
+// types
+import type { GoodType } from '../../components/card/good/types';
 
 interface Props {
 
@@ -20,8 +23,28 @@ export default function Shopping({ }: Props): ReactElement {
   const { productId, goods } = useAppSelector(state => (state.shop))
   const dispatch = useAppDispatch()
 
+  const cardProductRef = useRef<HTMLDivElement>(null)
+
   // good-card onclick event
-  const handleGoodCardClick = (productId: number) => { dispatch(selectProduct(productId)) }
+  const handleGoodCardClick = (productId: number) => {
+    dispatch(selectProduct(productId))
+    // setTimeout(...): 使之排在异步状态更新完成后
+    setTimeout(() => {
+      cardProductRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+      })
+    })
+  }
+
+  // 当前被选中的商品
+  const [good, setGood] = useState<GoodType | null>(null)
+  useEffect(() => {
+    if (productId !== -1) {
+      const good = goods.find((good) => (good.id === productId))
+      good && setGood(good)
+    }
+  }, [productId])
 
   return (
     <>
@@ -76,8 +99,20 @@ export default function Shopping({ }: Props): ReactElement {
       </article>
       {/* 购物详情块 */}
       {
-        (productId !== -1) ? (
-          <Product imgsUrl={goods.find((good) => (good.id === productId))?.imgsUrl!} />
+        (good) ? (
+          <div
+            className={ShoppingClass['section-five']}
+            ref={cardProductRef}
+          >
+            <CardProduct imgsUrl={good.imgsUrl!} />
+            <div className={`product-info`}>
+              <h2 className={`product-name`}>{good.name}</h2>
+              <span className={`price`}>{`RMB ${good.price}`}</span>
+              <div className={`sperator`}></div>
+              <ButtonTypeOne mode='light' text={'add to cart'} style={{ textTransform: 'uppercase' }} />
+              <p>{good.desc}</p>
+            </div>
+          </div>
         ) : null
       }
     </>

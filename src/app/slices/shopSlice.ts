@@ -3,7 +3,7 @@ import type { GoodType } from '../../components/card/good/types';
 
 const goods: GoodType[] = [{
   id: 0, // 商品编号
-  name: '曲奇', // 商品名称
+  name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=1',
     'https://picsum.photos/200/300?random=2',
@@ -17,7 +17,7 @@ const goods: GoodType[] = [{
   likes: 3, // 喜好数目
 }, {
   id: 1, // 商品编号
-  name: '曲奇', // 商品名称
+  name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=11',
     'https://picsum.photos/200/300?random=12',
@@ -31,7 +31,7 @@ const goods: GoodType[] = [{
   likes: 3, // 喜好数目
 }, {
   id: 2, // 商品编号
-  name: '曲奇', // 商品名称
+  name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=4',
     'https://picsum.photos/200/300?random=5',
@@ -45,7 +45,7 @@ const goods: GoodType[] = [{
   likes: 3, // 喜好数目
 }, {
   id: 3, // 商品编号
-  name: '曲奇', // 商品名称
+  name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=7',
     'https://picsum.photos/200/300?random=8',
@@ -59,7 +59,7 @@ const goods: GoodType[] = [{
   likes: 3, // 喜好数目
 }, {
   id: 0, // 商品编号
-  name: '曲奇', // 商品名称
+  name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=1',
     'https://picsum.photos/200/300?random=2',
@@ -73,7 +73,7 @@ const goods: GoodType[] = [{
   likes: 3, // 喜好数目
 }, {
   id: 1, // 商品编号
-  name: '曲奇', // 商品名称
+  name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=11',
     'https://picsum.photos/200/300?random=12',
@@ -87,7 +87,7 @@ const goods: GoodType[] = [{
   likes: 3, // 喜好数目
 }, {
   id: 2, // 商品编号
-  name: '曲奇', // 商品名称
+  name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=4',
     'https://picsum.photos/200/300?random=5',
@@ -101,7 +101,7 @@ const goods: GoodType[] = [{
   likes: 3, // 喜好数目
 }, {
   id: 3, // 商品编号
-  name: '曲奇', // 商品名称
+  name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=7',
     'https://picsum.photos/200/300?random=8',

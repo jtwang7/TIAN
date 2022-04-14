@@ -4,6 +4,7 @@ import { useSpring, animated } from 'react-spring'
 
 interface ButtonTypeOneProps {
   text: string,
+  mode?: 'light' | 'dark',
   style?: React.CSSProperties,
   onClick?: React.MouseEventHandler<HTMLDivElement>,
   handleMouseEnter?: React.MouseEventHandler<HTMLDivElement>,
@@ -12,6 +13,7 @@ interface ButtonTypeOneProps {
 
 export default function TypeOne({
   text,
+  mode = 'dark',
   style = {},
   onClick = undefined,
   handleMouseEnter = undefined,
@@ -38,7 +40,7 @@ export default function TypeOne({
 
   return (
     <div
-      className={TypeOneClass['type-one-container']}
+      className={TypeOneClass[`type-one-container-${mode}`]}
       style={{ width: '180px', height: '40px', ...style }}
       onMouseEnter={(e) => {onMouseEnter(); handleMouseEnter?.(e)}}
       onMouseLeave={(e) => {onMouseLeave(); handleMouseLeave?.(e)}}

@@ -5,7 +5,8 @@ import ShoppingClass from './Shopping.module.scss';
 import { Parallax } from 'react-parallax';
 import CardGood from '../../components/card/good/Good';
 // hooks
-import { useAppSelector } from '../../app/store';
+import { useAppSelector, useAppDispatch } from '../../app/store';
+import { selectProduct } from '../../app/slices/shopSlice';
 
 interface Props {
 
@@ -15,7 +16,11 @@ export default function Shopping({ }: Props): ReactElement {
   const image1 = 'https://picsum.photos/1500/1500?random=1'
   const image2 = 'https://picsum.photos/1500/1500?random=2'
 
-  const { goods } = useAppSelector(state => (state.shop))
+  const { productId, goods } = useAppSelector(state => (state.shop))
+  const dispatch = useAppDispatch()
+
+  // good-card onclick event
+  const handleGoodCardClick = (productId: number) => { dispatch(selectProduct(productId)) }
 
   return (
     <>
@@ -57,12 +62,25 @@ export default function Shopping({ }: Props): ReactElement {
           <section className={`goods-area`}>
             {goods.map(good => (
               <div className={`good-card`}>
-                <CardGood good={good} key={good.id} width={300} />
+                <CardGood
+                  good={good}
+                  key={good.id}
+                  width={300}
+                  onClick={() => { handleGoodCardClick(good.id) }}
+                />
               </div>
             ))}
           </section>
         </section>
       </article>
+      {/* 购物详情块 */}
+      {
+        (productId !== -1) ? (
+          <div>
+            123
+          </div>
+        ) : null
+      }
     </>
   )
 }

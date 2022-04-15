@@ -1,4 +1,4 @@
-import React, { ReactElement, useLayoutEffect } from 'react';
+import React, { ReactElement, useEffect, useLayoutEffect } from 'react';
 import CartClass from './Cart.module.scss';
 import { changeOrderNums } from '../../app/slices/shopSlice';
 // types
@@ -9,6 +9,7 @@ import NumberController from '../numberController/NumberController';
 import ButtonTypeOne from '../button/typeOne/TypeOne';
 // hooks
 import { useAppSelector, useAppDispatch } from '../../app/store';
+import { useSpring, animated } from 'react-spring';
 
 
 
@@ -22,7 +23,7 @@ export default function Cart({
   visible = false,
   placement = 'right', // 抽屉布局位置
 }: CartProps & DrawerProps): ReactElement {
-  const { cartOrders } = useAppSelector(state => state.shop)
+  const { cartOrders, subtotal } = useAppSelector(state => state.shop)
   const dispatch = useAppDispatch()
 
   // header style
@@ -38,6 +39,18 @@ export default function Cart({
       const title = document.querySelector('.ant-drawer-title') as HTMLDivElement
       title.style.setProperty('font-size', '40px')
     }
+  }, [visible])
+
+  // 动画
+  const [checkOutAnimation, checkOutApi] = useSpring(() => ({
+    from: { bottom: '-500px' },
+    reset: true,
+  }))
+  useEffect(() => {
+    checkOutApi.start({
+      to: { bottom: '0px' },
+      reset: true,
+    })
   }, [visible])
 
   return (
@@ -86,10 +99,10 @@ export default function Cart({
         <span className={`title`}>order note</span>
         <textarea className={`text-area`}></textarea>
       </div>
-      <section className={CartClass['check-out-container']}>
+      <animated.section className={CartClass['check-out-container']} style={checkOutAnimation}>
         <div className={`title-container`}>
           <span>subtotal</span>
-          <span>{`RMB 123`}</span>
+          <span>{`RMB ${subtotal}`}</span>
         </div>
         <p className={`description`}>Shipping, taxes, and discount codes calculated at checkout.</p>
         <ButtonTypeOne
@@ -102,7 +115,7 @@ export default function Cart({
             margin: '0 auto',
           }}
         />
-      </section>
-    </Drawer>
+      </animated.section>
+    </Drawer >
   )
 }

@@ -126,12 +126,19 @@ export type ShopState = {
   productId: number, // 当前所选商品id
   goods: GoodType[], // 商品信息
   cartOrders: CartOrder[], // 购物车订单
+  subtotal: number, // 购物总价格
 }
 // store仓库初始值
 const initialState: ShopState = {
   productId: -1,
   goods,
   cartOrders: [],
+  subtotal: 0,
+}
+
+// common function
+const calSubtotal = <T extends CartOrder[]>(cartOrders: T) => {
+  return cartOrders.reduce((prev, item) => (prev + (item.orderNums * item.price)), 0)
 }
 
 
@@ -143,20 +150,26 @@ const selectProductFn: CaseReducer<ShopState, PayloadAction<number>> = (state, a
 const addToCartFn: CaseReducer<ShopState, PayloadAction<GoodType>> = (state, { payload }) => {
   const ids = state.cartOrders.map(item => (item.id))
   if (!ids.includes(payload.id)) {
+    /**添加新的商品 */
     state.cartOrders.unshift({
       ...payload,
       orderNums: 1,
     })
+    /**更新总价格 */
+    state.subtotal = calSubtotal(state.cartOrders)
   }
 }
 const changeOrderNumsFn: CaseReducer<ShopState, PayloadAction<{ id: number, nums: number }>> = (state, { payload }) => {
-  // 在每次修改前，清除订单数为0的订单
+  /**在每次修改前，清除订单数为0的订单 */
   state.cartOrders = state.cartOrders.filter(item => (item.orderNums !== 0))
+  /**更新订单数 */
   for (let item of state.cartOrders) {
     if (item.id === payload.id) {
       item.orderNums = payload.nums
     }
   }
+  /**更新总价格 */
+  state.subtotal = calSubtotal(state.cartOrders)
 }
 
 

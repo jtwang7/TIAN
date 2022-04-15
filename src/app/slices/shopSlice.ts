@@ -38,7 +38,7 @@ const goods: GoodType[] = [{
     'https://picsum.photos/200/300?random=6',
   ], // 商品图片地址
   price: 10, // 价格
-  nums: 0, // 库存
+  nums: 10, // 库存
   desc: '', // 商品描述
   comment: ['abc', 'defg'], // 评论
   score: 4.7, // 评分
@@ -52,7 +52,7 @@ const goods: GoodType[] = [{
     'https://picsum.photos/200/300?random=9',
   ], // 商品图片地址
   price: 10, // 价格
-  nums: 0, // 库存
+  nums: 10, // 库存
   desc: '', // 商品描述
   comment: ['abc', 'defg'], // 评论
   score: 4.7, // 评分
@@ -115,10 +115,8 @@ const goods: GoodType[] = [{
   likes: 3, // 喜好数目
 },]
 
-export type CartOrder = { 
-  id: number, // 商品唯一标签
-  nums: number, // 商品数
-  order: number, // 商品添加进入购物车的顺序
+export interface CartOrder extends GoodType {
+  orderNums: number, // 订单数
   remark?: string, // 商品额外购物备注 
 }
 
@@ -142,19 +140,12 @@ const shopSlice = createSlice({
       state.productId = action.payload
     },
     // 添加商品进入购物车
-    addToCart: (state, action) => {
-      const ids: number[] = []
-      const orders: number[] = []
-      for (let item of state.cartOrders) {
-        ids.push(item.id)
-        orders.push(item.order)
-      }
-      const curMaxOrder = Math.max(...orders) || 0
-      if (!ids.includes(action.payload)) {
-        state.cartOrders.push({
-          id: action.payload,
-          order: curMaxOrder + 1,
-          nums: 1,
+    addToCart: (state, { payload }: { payload: GoodType }) => {
+      const ids = state.cartOrders.map(item => (item.id))
+      if (!ids.includes(payload.id)) {
+        state.cartOrders.unshift({
+          ...payload,
+          orderNums: 1,
         })
       }
     }

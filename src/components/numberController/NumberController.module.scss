@@ -1,0 +1,59 @@
+@use '../../styles/variable' as obj;
+
+@mixin theme-color($light-theme: true, $with-border: true) {
+  @if $light-theme {
+    @if $with-border {
+      border-color: obj.$light-black;
+    }
+    background-color: obj.$white;
+    color: obj.$light-black;
+  } @else {
+    @if $with-border {
+      border-color: obj.$white;
+    }
+    background-color: obj.$light-black;
+    color: obj.$white;
+  }
+}
+
+.container-light {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  width: 100px;
+
+  :global {
+    .button-style {
+      height: 100%;
+      aspect-ratio: 1/1;
+      flex: 0 0;
+      cursor: pointer;
+      font-size: 20px;
+      @include theme-color(true, ture);
+
+      &:hover {
+        @include theme-color(false, false);
+      }
+    }
+
+    .input-style {
+      @include theme-color(true, true);
+      height: 100%;
+      box-sizing: border-box;
+      border-left: 0px;
+      border-right: 0px;
+      flex: 1 1;
+      outline: none;
+      text-align: center;
+    }
+    // 隐藏 type='number' 时 input 控件的默认上下箭头
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type="number"] {
+      -moz-appearance: textfield;
+    }
+  }
+}

@@ -18,13 +18,7 @@ export default function Cart({
   visible = false,
   placement = 'right', // 抽屉布局位置
 }: CartProps & DrawerProps): ReactElement {
-  const { cartOrders, goods } = useAppSelector(state => state.shop)
-  const [cartGoods, setCartGoods] = useState<GoodType[]>([])
-  useEffect(() => {
-    const cartOrderIds = cartOrders.map(item => (item.id))
-    const data = goods.filter((good) => (cartOrderIds.includes(good.id)))
-    setCartGoods(data)
-  }, [cartOrders, goods])
+  const { cartOrders } = useAppSelector(state => state.shop)
 
   // header style
   const headerStyle = {
@@ -55,11 +49,11 @@ export default function Cart({
       headerStyle={headerStyle}
     >
       {
-        cartGoods.map((good) => (
+        cartOrders.map((good) => (
           <div className={CartClass['product-info']} key={good.id}>
             <img alt='product' src={good.imgsUrl[0]} className={'img-style'} />
-            <section>
-              <p>{good.name}</p>
+            <section className={`detail`}>
+              <p className={`good-name`}>{good.name}</p>
               <div>
                 <span>{`RMB ${good.price}`}</span>
               </div>

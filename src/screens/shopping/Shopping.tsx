@@ -41,9 +41,9 @@ export default function Shopping({ }: Props): ReactElement {
   }
 
   // add to cart
-  const handleAddToCart = (id: number): void => {
+  const handleAddToCart = (good: GoodType): void => {
     setCartVisible(true) // 弹出购物车
-    dispatch(addToCart(id)) // 添加商品进入购物车
+    dispatch(addToCart(good)) // 添加商品进入购物车
   }
 
   // 当前被选中的商品
@@ -132,7 +132,7 @@ export default function Shopping({ }: Props): ReactElement {
                       position: 'relative',
                       inset: '0',
                     }}
-                    onClick={() => { handleAddToCart(good.id) }}
+                    onClick={() => { handleAddToCart(good) }}
                   />
                 ) : (
                   <ButtonTypeOne

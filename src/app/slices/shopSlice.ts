@@ -150,7 +150,8 @@ const addToCartFn: CaseReducer<ShopState, PayloadAction<GoodType>> = (state, { p
   }
 }
 const changeOrderNumsFn: CaseReducer<ShopState, PayloadAction<{ id: number, nums: number }>> = (state, { payload }) => {
-  console.log(1)
+  // 在每次修改前，清除订单数为0的订单
+  state.cartOrders = state.cartOrders.filter(item => (item.orderNums !== 0))
   for (let item of state.cartOrders) {
     if (item.id === payload.id) {
       item.orderNums = payload.nums

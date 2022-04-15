@@ -6,6 +6,7 @@ import type { DrawerProps } from 'antd/lib/drawer/index';
 // components
 import { Drawer } from 'antd';
 import NumberController from '../numberController/NumberController';
+import ButtonTypeOne from '../button/typeOne/TypeOne';
 // hooks
 import { useAppSelector, useAppDispatch } from '../../app/store';
 
@@ -64,7 +65,7 @@ export default function Cart({
                     width={110}
                     height={30}
                     initValue={good.orderNums}
-                    onChange={(value) => { dispatch(changeOrderNums({id: good.id, nums: value})) }}
+                    onChange={(value) => { dispatch(changeOrderNums({ id: good.id, nums: value })) }}
                   />
                   <span>{`RMB ${good.price}`}</span>
                 </div>
@@ -81,6 +82,27 @@ export default function Cart({
           </>
         ))
       }
+      <div className={CartClass['order-note']}>
+        <span className={`title`}>order note</span>
+        <textarea className={`text-area`}></textarea>
+      </div>
+      <section className={CartClass['check-out-container']}>
+        <div className={`title-container`}>
+          <span>subtotal</span>
+          <span>{`RMB 123`}</span>
+        </div>
+        <p className={`description`}>Shipping, taxes, and discount codes calculated at checkout.</p>
+        <ButtonTypeOne
+          text={'check out'}
+          mode='light'
+          style={{
+            position: 'absolute',
+            left: '0px',
+            right: '0px',
+            margin: '0 auto',
+          }}
+        />
+      </section>
     </Drawer>
   )
 }

@@ -1,12 +1,15 @@
-import React, { ReactElement, useEffect, useLayoutEffect, useState } from 'react';
+import React, { ReactElement, useLayoutEffect } from 'react';
 import CartClass from './Cart.module.scss';
+import { changeOrderNums } from '../../app/slices/shopSlice';
 // types
 import type { DrawerProps } from 'antd/lib/drawer/index';
-import type { GoodType } from '../../components/card/good/types';
 // components
 import { Drawer } from 'antd';
+import NumberController from '../numberController/NumberController';
 // hooks
-import { useAppSelector } from '../../app/store';
+import { useAppSelector, useAppDispatch } from '../../app/store';
+
+
 
 export interface CartProps {
   visible?: boolean,
@@ -19,6 +22,7 @@ export default function Cart({
   placement = 'right', // 抽屉布局位置
 }: CartProps & DrawerProps): ReactElement {
   const { cartOrders } = useAppSelector(state => state.shop)
+  const dispatch = useAppDispatch()
 
   // header style
   const headerStyle = {
@@ -50,15 +54,31 @@ export default function Cart({
     >
       {
         cartOrders.map((good) => (
-          <div className={CartClass['product-info']} key={good.id}>
-            <img alt='product' src={good.imgsUrl[0]} className={'img-style'} />
-            <section className={`detail`}>
-              <p className={`good-name`}>{good.name}</p>
-              <div>
-                <span>{`RMB ${good.price}`}</span>
-              </div>
-            </section>
-          </div>
+          <>
+            <div className={CartClass['product-info']} key={good.id}>
+              <img alt='product' src={good.imgsUrl[0]} className={'img-style'} />
+              <section className={`detail`}>
+                <p className={`good-name`}>{good.name}</p>
+                <div className={`num-controller`}>
+                  <NumberController
+                    width={110}
+                    height={30}
+                    initValue={good.orderNums}
+                    onChange={(value) => { dispatch(changeOrderNums({id: good.id, nums: value})) }}
+                  />
+                  <span>{`RMB ${good.price}`}</span>
+                </div>
+              </section>
+            </div>
+            <div
+              style={{
+                width: '100%',
+                height: '15px',
+                borderBottom: '1px solid #323232',
+                marginBottom: '15px'
+              }}
+            ></div>
+          </>
         ))
       }
     </Drawer>

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
 import type { GoodType } from '../../components/card/good/types';
 
 const goods: GoodType[] = [{
@@ -120,37 +121,60 @@ export interface CartOrder extends GoodType {
   remark?: string, // 商品额外购物备注 
 }
 
-// store仓库初始值
-const initialState: {
+
+export type ShopState = {
   productId: number, // 当前所选商品id
   goods: GoodType[], // 商品信息
   cartOrders: CartOrder[], // 购物车订单
-} = {
+}
+// store仓库初始值
+const initialState: ShopState = {
   productId: -1,
   goods,
   cartOrders: [],
 }
+
+
+// reducers
+// https://redux-toolkit.js.org/usage/usage-with-typescript#createslice
+const selectProductFn: CaseReducer<ShopState, PayloadAction<number>> = (state, action) => {
+  state.productId = action.payload
+}
+const addToCartFn: CaseReducer<ShopState, PayloadAction<GoodType>> = (state, { payload }) => {
+  const ids = state.cartOrders.map(item => (item.id))
+  if (!ids.includes(payload.id)) {
+    state.cartOrders.unshift({
+      ...payload,
+      orderNums: 1,
+    })
+  }
+}
+const changeOrderNumsFn: CaseReducer<ShopState, PayloadAction<{ id: number, nums: number }>> = (state, { payload }) => {
+  console.log(1)
+  for (let item of state.cartOrders) {
+    if (item.id === payload.id) {
+      item.orderNums = payload.nums
+    }
+  }
+}
+
 
 const shopSlice = createSlice({
   name: 'shop',
   initialState: initialState,
   reducers: {
     // 选择商品
-    selectProduct: (state, action) => {
-      state.productId = action.payload
-    },
+    selectProduct: selectProductFn,
     // 添加商品进入购物车
-    addToCart: (state, { payload }: { payload: GoodType }) => {
-      const ids = state.cartOrders.map(item => (item.id))
-      if (!ids.includes(payload.id)) {
-        state.cartOrders.unshift({
-          ...payload,
-          orderNums: 1,
-        })
-      }
-    }
+    addToCart: addToCartFn,
+    // 修改商品订单数目
+    changeOrderNums: changeOrderNumsFn,
   }
 })
 
 export default shopSlice
-export const { selectProduct, addToCart } = shopSlice.actions
+export const {
+  selectProduct,
+  addToCart,
+  changeOrderNums,
+} = shopSlice.actions

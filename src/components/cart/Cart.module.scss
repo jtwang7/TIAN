@@ -1,7 +1,7 @@
 @use '../../styles/variable' as obj;
 
 .product-info {
-  width: 150px;
+  width: 100%;
   display: flex;
   align-items: flex-start;
 
@@ -9,7 +9,7 @@
     .img-style {
       aspect-ratio: obj.$img-aspect-ratio;
       object-fit: cover;
-      width: 100%;
+      width: 150px;
     }
 
     .detail {
@@ -19,6 +19,13 @@
 
       .good-name {
         font-size: 20px;
+      }
+
+      .num-controller {
+        display: flex;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
       }
     }
   }

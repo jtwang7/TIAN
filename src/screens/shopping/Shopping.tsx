@@ -57,7 +57,11 @@ export default function Shopping({ }: Props): ReactElement {
 
   return (
     <>
-      <Cart visible={cartVisible} onClose={() => { setCartVisible(false) }} />
+      <Cart
+        width={420}
+        visible={cartVisible}
+        onClose={() => { setCartVisible(false) }}
+      />
       <Parallax
         bgImage={image1}
         bgImageAlt="random image"

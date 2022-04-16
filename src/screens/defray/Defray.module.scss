@@ -1,6 +1,8 @@
 @use '../../styles/variable' as obj;
 
 $margin-bottom: 10px;
+$border-color: #e1e1e1;
+$border-style: 0.5px solid $border-color;
 
 .container {
   :global {
@@ -21,7 +23,7 @@ $margin-bottom: 10px;
     .left-bar {
       width: 55vw;
       box-sizing: border-box;
-      padding: 30px 50px 100px 15vw;
+      padding: 30px 50px 30px 15vw;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -60,7 +62,69 @@ $margin-bottom: 10px;
     .right-bar {
       width: 45vw;
       background-color: #fafafa;
-      border-left: 1px solid #e1e1e1;
+      border-left: 1px solid $border-color;
+      padding: 60px 15vw 30px 50px;
+      box-sizing: border-box;
+
+      .products {
+        width: 100%;
+        border-bottom: $border-style;
+
+        .product {
+          width: 100%;
+          display: flex;
+          align-items: flex-start;
+          margin-bottom: 2 * $margin-bottom;
+
+          .description {
+            flex: 1 1;
+            margin-left: 15px;
+
+            .text {
+              display: block;
+              height: 25px;
+              line-height: 25px;
+              font-size: 15px;
+            }
+          }
+        }
+      }
+      .apply-group {
+        padding: 20px 0px;
+        border-bottom: $border-style;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .subtotal {
+        @extend .apply-group;
+        flex-direction: column;
+
+        .item {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+
+          span {
+            font-size: obj.$font-size-base;
+          }
+        }
+      }
+
+      .total {
+        @extend .apply-group;
+        span {
+          font-size: obj.$font-size-base;
+        }
+
+        .total-money {
+          font-family: 'georgia_pro';
+          font-weight: bold;
+          font-size: obj.$font-size-base * 1.3;
+        }
+      }
     }
   }
 }

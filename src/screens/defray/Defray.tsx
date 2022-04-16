@@ -26,7 +26,7 @@ export default function Defray({ }: Props): ReactElement {
   const backToCart = () => { navigate('../shopping') }
 
   // redux state
-  const { cartOrders } = useAppSelector(state => state.shop)
+  const { cartOrders, subtotal } = useAppSelector(state => state.shop)
 
   return (
     <div className={DefrayClass.container}>
@@ -114,21 +114,45 @@ export default function Defray({ }: Props): ReactElement {
         </section>
       </div>
       <div className={`right-bar`}>
-        <section>
+        <section className={`products`}>
           {
             cartOrders.map((product, idx) => (
-              <section>
-                <Badge 
+              <section className={`product`}>
+                <Badge
                   key={idx}
-                  node={(<img alt='' src={product.imgsUrl[0]} style={{width: '100%'}} />)}
+                  node={(<img alt='' src={product.imgsUrl[0]} style={{ width: '100%' }} />)}
                   count={product.orderNums}
-                  width={90}
-                  height={110}
+                  width={70}
+                  height={90}
                 />
+                <div className={`description`}>
+                  <span className={`text`}>{product.name}</span>
+                  <span className={`text`} style={{ fontWeight: 'bold' }}>{`RMB ${product.price * product.orderNums}`}</span>
+                </div>
               </section>
             ))
           }
         </section>
+        <section className={`apply-group`}>
+          <InfoInput
+            placeholder='Gift card or discount code'
+            optional={true}
+            style={{width: '76%'}}
+          />
+          <ButtonTypeOne 
+            text='Apply'
+            mode='light'
+            style={{ width: '20%', minWidth: '80px', height: '40px', position: 'relative' }}
+          />
+        </section>
+        <section className={`subtotal`}>
+          <div className={`item`}><span>Subtotal</span><span>{`RMB ${subtotal}`}</span></div>
+          <div className={`item`}><span>Discount</span><span>{`-RMB ${0}`}</span></div>
+        </section>
+        <div className={`total`}>
+          <span>Total</span>
+          <span className={`total-money`}>{`RMB ${subtotal - 0}`}</span>
+        </div>
       </div>
     </div>
   )

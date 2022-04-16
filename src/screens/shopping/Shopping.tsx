@@ -7,6 +7,7 @@ import CardGood from '../../components/card/good/Good';
 import CardProduct from '../../components/card/product/Product';
 import ButtonTypeOne from '../../components/button/typeOne/TypeOne';
 import Cart from '../../components/cart/Cart';
+import CartIcon from '../../components/cart/CartIcon';
 // hooks
 import { useAppSelector, useAppDispatch } from '../../app/store';
 import { selectProduct, addToCart } from '../../app/slices/shopSlice';
@@ -21,7 +22,7 @@ export default function Shopping({ }: Props): ReactElement {
   const image1 = 'https://picsum.photos/1500/1500?random=1'
   const image2 = 'https://picsum.photos/1500/1500?random=2'
 
-  const { productId, goods } = useAppSelector(state => (state.shop))
+  const { productId, goods, cartOrders } = useAppSelector(state => (state.shop))
   const dispatch = useAppDispatch()
   // 购物车可视状态
   const [cartVisible, setCartVisible] = useState(false)
@@ -96,6 +97,15 @@ export default function Shopping({ }: Props): ReactElement {
       <article className={ShoppingClass['section-four']}>
         <header className={`head-bar`}></header>
         <section className={`body-area`}>
+          <CartIcon
+            count={cartOrders.length}
+            style={{
+              position: 'absolute',
+              top: '45px',
+              right: '100px',
+            }}
+            onClick={() => {setCartVisible(true)}}
+          />
           <h2 className={`title`}>curated homemade goods</h2>
           <section className={`goods-area`}>
             {goods.map(good => (

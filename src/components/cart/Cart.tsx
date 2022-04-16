@@ -1,6 +1,7 @@
 import React, { ReactElement, useEffect, useLayoutEffect } from 'react';
 import CartClass from './Cart.module.scss';
-import { changeOrderNums } from '../../app/slices/shopSlice';
+// Actions
+import { changeOrderNums, deleteZero } from '../../app/slices/shopSlice';
 // types
 import type { DrawerProps } from 'antd/lib/drawer/index';
 // components
@@ -26,10 +27,10 @@ export default function Cart({
 }: CartProps & DrawerProps): ReactElement {
   const { cartOrders, subtotal } = useAppSelector(state => state.shop)
   const dispatch = useAppDispatch()
-  
+
   // 路由跳转
   const navigate = useNavigate()
-  const goToDefray = () => {navigate('../defray')}
+  const goToDefray = () => { navigate('../defray') }
 
   // header style
   const headerStyle = {
@@ -58,6 +59,13 @@ export default function Cart({
     })
   }, [visible])
 
+  // 实时监听并清空商品数为0的订单
+  useEffect(() => {
+    if (!visible) {
+      dispatch(deleteZero())
+    }
+  }, [cartOrders, visible])
+
   return (
     <Drawer
       placement={placement}
@@ -72,56 +80,64 @@ export default function Cart({
       headerStyle={headerStyle}
     >
       {
-        cartOrders.map((good) => (
+        !cartOrders.length ? (
+          <p className={CartClass['empty-text']}>Your cart is currently empty.</p>
+        ) : (
           <>
-            <div className={CartClass['product-info']} key={good.id}>
-              <img alt='product' src={good.imgsUrl[0]} className={'img-style'} />
-              <section className={`detail`}>
-                <p className={`good-name`}>{good.name}</p>
-                <div className={`num-controller`}>
-                  <NumberController
-                    width={110}
-                    height={30}
-                    initValue={good.orderNums}
-                    onChange={(value) => { dispatch(changeOrderNums({ id: good.id, nums: value })) }}
-                  />
-                  <span>{`RMB ${good.price}`}</span>
-                </div>
-              </section>
+            {
+              cartOrders.map((good) => (
+                <>
+                  <div className={CartClass['product-info']} key={good.id}>
+                    <img alt='product' src={good.imgsUrl[0]} className={'img-style'} />
+                    <section className={`detail`}>
+                      <p className={`good-name`}>{good.name}</p>
+                      <div className={`num-controller`}>
+                        <NumberController
+                          width={110}
+                          height={30}
+                          initValue={good.orderNums}
+                          onChange={(value) => { dispatch(changeOrderNums({ id: good.id, nums: value })) }}
+                        />
+                        <span>{`RMB ${good.price}`}</span>
+                      </div>
+                    </section>
+                  </div>
+                  <div
+                    style={{
+                      width: '100%',
+                      height: '15px',
+                      borderBottom: '1px solid #323232',
+                      marginBottom: '15px'
+                    }}
+                  ></div>
+                </>
+              ))
+            }
+            <div className={CartClass['order-note']}>
+              <span className={`title`}>order note</span>
+              <textarea className={`text-area`}></textarea>
             </div>
-            <div
-              style={{
-                width: '100%',
-                height: '15px',
-                borderBottom: '1px solid #323232',
-                marginBottom: '15px'
-              }}
-            ></div>
+            <animated.section className={CartClass['check-out-container']} style={checkOutAnimation}>
+              <div className={`title-container`}>
+                <span>subtotal</span>
+                <span>{`RMB ${subtotal}`}</span>
+              </div>
+              <p className={`description`}>Shipping, taxes, and discount codes calculated at checkout.</p>
+              <ButtonTypeOne
+                text={'check out'}
+                mode='light'
+                style={{
+                  position: 'absolute',
+                  left: '0px',
+                  right: '0px',
+                  margin: '0 auto',
+                }}
+                onClick={goToDefray}
+              />
+            </animated.section>
           </>
-        ))
+        )
       }
-      <div className={CartClass['order-note']}>
-        <span className={`title`}>order note</span>
-        <textarea className={`text-area`}></textarea>
-      </div>
-      <animated.section className={CartClass['check-out-container']} style={checkOutAnimation}>
-        <div className={`title-container`}>
-          <span>subtotal</span>
-          <span>{`RMB ${subtotal}`}</span>
-        </div>
-        <p className={`description`}>Shipping, taxes, and discount codes calculated at checkout.</p>
-        <ButtonTypeOne
-          text={'check out'}
-          mode='light'
-          style={{
-            position: 'absolute',
-            left: '0px',
-            right: '0px',
-            margin: '0 auto',
-          }}
-          onClick={goToDefray}
-        />
-      </animated.section>
     </Drawer >
   )
 }

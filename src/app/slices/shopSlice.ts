@@ -160,8 +160,6 @@ const addToCartFn: CaseReducer<ShopState, PayloadAction<GoodType>> = (state, { p
   }
 }
 const changeOrderNumsFn: CaseReducer<ShopState, PayloadAction<{ id: number, nums: number }>> = (state, { payload }) => {
-  /**在每次修改前，清除订单数为0的订单 */
-  state.cartOrders = state.cartOrders.filter(item => (item.orderNums !== 0))
   /**更新订单数 */
   for (let item of state.cartOrders) {
     if (item.id === payload.id) {
@@ -170,6 +168,10 @@ const changeOrderNumsFn: CaseReducer<ShopState, PayloadAction<{ id: number, nums
   }
   /**更新总价格 */
   state.subtotal = calSubtotal(state.cartOrders)
+}
+const deleteZeroFn:CaseReducer<ShopState> = (state) => {
+  /**清除商品数为0的订单 */
+  state.cartOrders = state.cartOrders.filter(item => (item.orderNums !== 0))
 }
 
 
@@ -184,6 +186,8 @@ const shopSlice = createSlice({
     addToCart: addToCartFn,
     // 修改商品订单数目
     changeOrderNums: changeOrderNumsFn,
+    // 清除商品数为0的订单
+    deleteZero: deleteZeroFn,
   }
 })
 
@@ -192,4 +196,5 @@ export const {
   selectProduct,
   addToCart,
   changeOrderNums,
+  deleteZero,
 } = shopSlice.actions

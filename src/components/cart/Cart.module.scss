@@ -2,12 +2,17 @@
 
 $check-out-height: 200px;
 
-.product-info {
-  width: 100%;
-  display: flex;
-  align-items: flex-start;
+.empty-text {
+  font-family: 'georgia_pro_light';
+  font-size: obj.$font-size-base;
+}
 
+.product-info {
   :global {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+
     .img-style {
       aspect-ratio: obj.$img-aspect-ratio;
       object-fit: cover;
@@ -58,7 +63,7 @@ $check-out-height: 200px;
 
   &::after {
     display: block;
-    content: '';
+    content: "";
     height: $check-out-height;
   }
 }
@@ -70,11 +75,11 @@ $check-out-height: 200px;
   bottom: 0;
   left: 0;
   right: 0;
-  border-top: .5px solid obj.$light-black;
+  border-top: 0.5px solid obj.$light-black;
   padding: 24px;
   padding-bottom: 15px;
   background-color: obj.$white;
-  font-family: 'georgia_pro_light';
+  font-family: "georgia_pro_light";
 
   :global {
     .title-container {
@@ -83,7 +88,7 @@ $check-out-height: 200px;
       align-items: center;
       font-size: obj.$font-size-base;
       text-transform: uppercase;
-      font-family: 'georgia_pro';
+      font-family: "georgia_pro";
     }
 
     .description {

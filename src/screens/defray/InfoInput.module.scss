@@ -1,0 +1,16 @@
+$error-color: #E74C3C;
+$warning-color: #F4D03F;
+
+.container {
+  width: 100%;
+
+  :global {
+    .error {
+      color: $error-color
+    }
+
+    .warning {
+      color: $warning-color;
+    }
+  }
+}

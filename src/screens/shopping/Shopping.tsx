@@ -1,5 +1,6 @@
 import { ReactElement, useEffect, useRef, useState } from 'react';
-import Logo from './logo.png';
+// import Logo from '../logo.png';
+import Logo from '../logo-light.png';
 import ShoppingClass from './Shopping.module.scss';
 // components
 import { Parallax } from 'react-parallax';

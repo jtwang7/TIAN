@@ -42,10 +42,25 @@ $margin-bottom: 10px;
         justify-content: space-between;
         align-items: flex-start;
       }
+
+      .button-row-group {
+        @extend .common-style;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        .text-button {
+          cursor: pointer;
+          font-size: obj.$font-size-base;
+          font-weight: normal;
+          margin-left: 15px;
+        }
+      }
     }
 
     .right-bar {
       width: 45vw;
+      background-color: #fafafa;
+      border-left: 1px solid #e1e1e1;
     }
   }
 }

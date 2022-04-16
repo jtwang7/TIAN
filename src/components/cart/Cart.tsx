@@ -10,6 +10,7 @@ import ButtonTypeOne from '../button/typeOne/TypeOne';
 // hooks
 import { useAppSelector, useAppDispatch } from '../../app/store';
 import { useSpring, animated } from 'react-spring';
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -25,6 +26,10 @@ export default function Cart({
 }: CartProps & DrawerProps): ReactElement {
   const { cartOrders, subtotal } = useAppSelector(state => state.shop)
   const dispatch = useAppDispatch()
+  
+  // 路由跳转
+  const navigate = useNavigate()
+  const goToDefray = () => {navigate('../defray')}
 
   // header style
   const headerStyle = {
@@ -114,6 +119,7 @@ export default function Cart({
             right: '0px',
             margin: '0 auto',
           }}
+          onClick={goToDefray}
         />
       </animated.section>
     </Drawer >

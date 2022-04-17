@@ -31,7 +31,7 @@ export default function Defray({ }: Props): ReactElement {
   const backToCart = () => { navigate('../shopping') }
 
   // redux state
-  const { cartOrders, subtotal } = useAppSelector(state => state.shop)
+  const { cartOrders, subtotal, customerInfo } = useAppSelector(state => state.shop)
   const dispatch = useAppDispatch()
 
   // apply-disabled status
@@ -53,6 +53,27 @@ export default function Defray({ }: Props): ReactElement {
   const handleApartmentChange = handleChange('apartment')
   const handleCityChange = handleChange('city')
 
+  /** check customer information */
+  const handleCheck = () => {
+    function exclude<T extends {}>(obj: T, keys: string[]) {
+      const data = {}
+      for (let [key, value] of Object.entries(obj)) {
+        if (keys.includes(key)) {
+          continue
+        } else {
+          Reflect.set(data, key, value)
+        }
+      }
+      return data
+    }
+    const res = exclude<CustomerInfo>(customerInfo, ['firstName', 'apartment'])
+    if (Object.values(res).every(item => (item !== ''))) {
+      console.log('存储到数据库')
+    } else {
+      console.log('数据未填写完整')
+    }
+  }
+
 
   return (
     <div className={DefrayClass.container}>
@@ -66,6 +87,7 @@ export default function Defray({ }: Props): ReactElement {
             warningMessage='Please enter correct type'
             optional={false}
             regCheck={emailRegExp}
+            value={customerInfo.email}
             onChange={handleEmailChange}
           />
         </section>
@@ -80,6 +102,7 @@ export default function Defray({ }: Props): ReactElement {
               regCheck={nameRegExp}
               width='49%'
               style={infoInputCommonStyle}
+              value={customerInfo.firstName}
               onChange={handleFirstNameChange}
             />
             <InfoInput
@@ -90,6 +113,7 @@ export default function Defray({ }: Props): ReactElement {
               regCheck={nameRegExp}
               width='49%'
               style={infoInputCommonStyle}
+              value={customerInfo.lastName}
               onChange={handleLastNameChange}
             />
           </div>
@@ -100,6 +124,7 @@ export default function Defray({ }: Props): ReactElement {
               optional={false}
               width='49%'
               style={infoInputCommonStyle}
+              value={customerInfo.socialAccount}
               onChange={handleSocialAccountChange}
             />
             <InfoInput
@@ -110,6 +135,7 @@ export default function Defray({ }: Props): ReactElement {
               regCheck={phoneRegExp}
               width='49%'
               style={infoInputCommonStyle}
+              value={customerInfo.phone}
               onChange={handlePhoneChange}
             />
           </div>
@@ -118,6 +144,7 @@ export default function Defray({ }: Props): ReactElement {
             errorMessage='Please enter address'
             optional={false}
             style={infoInputCommonStyle}
+            value={customerInfo.address}
             onChange={handleAddressChange}
           />
           <InfoInput
@@ -125,6 +152,7 @@ export default function Defray({ }: Props): ReactElement {
             errorMessage='Please enter Apartment, suite, etc.'
             optional={true}
             style={infoInputCommonStyle}
+            value={customerInfo.apartment}
             onChange={handleApartmentChange}
           />
           <InfoInput
@@ -132,14 +160,16 @@ export default function Defray({ }: Props): ReactElement {
             errorMessage='Please enter a city'
             optional={false}
             style={infoInputCommonStyle}
+            value={customerInfo.city}
             onChange={handleCityChange}
           />
         </section>
         <section className={`button-row-group`}>
           <ButtonTypeOne
-            text='Continue to shipping'
+            text='Save'
             mode='light'
-            style={{ width: '280px', height: '40px', position: 'relative' }}
+            style={{ width: '100px', height: '35px', position: 'relative' }}
+            onClick={handleCheck}
           />
           <span
             className={`text-button`}

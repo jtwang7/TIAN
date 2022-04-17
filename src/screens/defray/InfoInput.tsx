@@ -1,33 +1,35 @@
-import { ReactElement, useRef, useState } from 'react';
+import React, { ReactElement, useRef, useState } from 'react';
 import InfoInputClass from './InfoInput.module.scss';
 import { Input } from 'antd';
 // types
 import type { InputProps } from 'antd/lib/input/Input';
-import type { ChangeEventHandler } from 'react';
+import type { ChangeEventHandler, Ref } from 'react';
+import type { InputRef } from 'antd';
 
-export interface InfoInputProps extends InputProps {
+export interface InfoInputProps extends Omit<InputProps, 'value'> {
+  value?: string,
   regCheck?: RegExp,
   optional?: boolean,
   errorMessage?: string,
   warningMessage?: string,
 }
 
-export default function InfoInput({
+const InfoInput = React.forwardRef(({
   width,
   height,
   style,
   regCheck,
+  value = '',
   onChange: handleChange,
   placeholder = '',
   allowClear = true,
   optional = false,
   errorMessage = '',
   warningMessage = '',
-}: InfoInputProps): ReactElement {
-  const [value, setValue] = useState<string>('')
+}: InfoInputProps, ref: Ref<InputRef>): ReactElement => {
   const [status, setStatus] = useState<'error' | 'warning' | ''>('')
   const clickIn = useRef(false)
-  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => { setValue(e.target.value); handleChange?.(e); }
+  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => { handleChange?.(e); }
   const onFocus = () => { clickIn.current = true }
   const onBlur = () => {
     if (!optional && clickIn.current) {
@@ -41,8 +43,9 @@ export default function InfoInput({
     }
   }
   return (
-    <div className={InfoInputClass.container} style={{width, height, ...style}}>
+    <div className={InfoInputClass.container} style={{ width, height, ...style }}>
       <Input
+        ref={ref}
         placeholder={placeholder}
         allowClear={allowClear}
         value={value}
@@ -56,4 +59,6 @@ export default function InfoInput({
       {status === 'warning' && (<span className={`warning`}>{warningMessage}</span>)}
     </div>
   )
-}
+})
+
+export default InfoInput

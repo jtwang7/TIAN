@@ -123,13 +123,13 @@ export interface CartOrder extends GoodType {
 
 export interface CustomerInfo {
   email: string, // 邮箱
-  firstName?: string, // 姓
   lastName: string, // 名
   socialAccount: string, // 社交账号(wx, qq)
   phone: string, // 电话
   address: string, // 邮寄地址
-  apartment?: string, // 团体
   city: string, // 城市
+  firstName?: string, // 姓
+  apartment?: string, // 团体
 }
 export type CustomerInfoPayload = {key: keyof CustomerInfo, value: string}
 

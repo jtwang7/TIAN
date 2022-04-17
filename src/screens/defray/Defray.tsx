@@ -1,18 +1,20 @@
-import { ReactElement, useState } from 'react';
 import DefrayClass from './Defray.module.scss';
 import Logo from '../logo.png';
 // components
 import InfoInput from './InfoInput';
 import ButtonTypeOne from '../../components/button/typeOne/TypeOne';
 import Badge from '../../components/badge/Badge';
+import {message} from 'antd';
 // hooks
+import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../../app/store';
 // actions
 import { updateCustomerInfo } from '../../app/slices/shopSlice';
 // types
-import type { ChangeEventHandler } from 'react';
+import type { ChangeEventHandler, MutableRefObject, ReactElement } from 'react';
 import type { CustomerInfo } from '../../app/slices/shopSlice';
+import type { InputRef } from 'antd';
 
 
 interface Props {
@@ -20,22 +22,35 @@ interface Props {
 }
 
 export default function Defray({ }: Props): ReactElement {
+  /** style */
+  const infoInputCommonStyle = { marginBottom: '10px' }
+
+  /** 正则验证 */
   const emailRegExp = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/ // 邮箱验证正则
   const nameRegExp = /^[\u4E00-\u9FA5A-Za-z\s]+(·[\u4E00-\u9FA5A-Za-z]+)*$/ // 中英文姓名验证
   const phoneRegExp = /^[1][3,4,5,7,8][0-9]{9}$/ // 手机号验证
 
-  const infoInputCommonStyle = { marginBottom: '10px' }
-
-  // 路由跳转
+  /** 路由跳转 */
   const navigate = useNavigate()
   const backToCart = () => { navigate('../shopping') }
 
-  // redux state
+  /** redux state */
   const { cartOrders, subtotal, customerInfo } = useAppSelector(state => state.shop)
   const dispatch = useAppDispatch()
 
-  // apply-disabled status
+  /** apply-disabled status */
   const [applyDisabled, setApplyDisabled] = useState<boolean>(true)
+
+  /** <InfoInput /> Ref */
+  const emailRef = useRef<InputRef>(null!)
+  const firstNameRef = useRef<InputRef>(null!)
+  const lastNameRef = useRef<InputRef>(null!)
+  const socialAccountRef = useRef<InputRef>(null!)
+  const phoneRef = useRef<InputRef>(null!)
+  const addressRef = useRef<InputRef>(null!)
+  const apartmentRef = useRef<InputRef>(null!)
+  const cityRef = useRef<InputRef>(null!)
+  const refs: MutableRefObject<InputRef>[] = [emailRef, firstNameRef, lastNameRef, socialAccountRef, phoneRef, addressRef, apartmentRef, cityRef]
 
   /** <InfoInput /> onChange */
   const handleChange: (key: keyof CustomerInfo) => ChangeEventHandler<HTMLInputElement> = (key) => (e) => {
@@ -70,7 +85,11 @@ export default function Defray({ }: Props): ReactElement {
     if (Object.values(res).every(item => (item !== ''))) {
       console.log('存储到数据库')
     } else {
-      console.log('数据未填写完整')
+      message.error('存在未填写的必选项')
+      refs.forEach(ref => {
+        ref.current.focus()
+        ref.current.blur()
+      })
     }
   }
 
@@ -82,6 +101,7 @@ export default function Defray({ }: Props): ReactElement {
         <section className={`common-style`}>
           <span className={`sub-title`}>Contact information</span>
           <InfoInput
+            ref={emailRef}
             placeholder='Email'
             errorMessage='Please enter email'
             warningMessage='Please enter correct type'
@@ -95,6 +115,7 @@ export default function Defray({ }: Props): ReactElement {
           <span className={`sub-title`}>Shipping address</span>
           <div className={`input-row-group`}>
             <InfoInput
+              ref={firstNameRef}
               placeholder='First name (optional)'
               errorMessage='Please enter first name'
               warningMessage='Please enter correct type'
@@ -106,6 +127,7 @@ export default function Defray({ }: Props): ReactElement {
               onChange={handleFirstNameChange}
             />
             <InfoInput
+              ref={lastNameRef}
               placeholder='Last name'
               errorMessage='Please enter last name'
               warningMessage='Please enter correct type'
@@ -119,6 +141,7 @@ export default function Defray({ }: Props): ReactElement {
           </div>
           <div className={`input-row-group`}>
             <InfoInput
+              ref={socialAccountRef}
               placeholder='Wechat account or QQ'
               errorMessage='Please enter your Wechat or QQ'
               optional={false}
@@ -128,6 +151,7 @@ export default function Defray({ }: Props): ReactElement {
               onChange={handleSocialAccountChange}
             />
             <InfoInput
+              ref={phoneRef}
               placeholder='Phone'
               errorMessage='Please enter your phone number'
               warningMessage='Please enter correct type'
@@ -140,6 +164,7 @@ export default function Defray({ }: Props): ReactElement {
             />
           </div>
           <InfoInput
+            ref={addressRef}
             placeholder='Address'
             errorMessage='Please enter address'
             optional={false}
@@ -148,6 +173,7 @@ export default function Defray({ }: Props): ReactElement {
             onChange={handleAddressChange}
           />
           <InfoInput
+            ref={apartmentRef}
             placeholder='Apartment, suite, etc. (optional)'
             errorMessage='Please enter Apartment, suite, etc.'
             optional={true}
@@ -156,6 +182,7 @@ export default function Defray({ }: Props): ReactElement {
             onChange={handleApartmentChange}
           />
           <InfoInput
+            ref={cityRef}
             placeholder='City'
             errorMessage='Please enter a city'
             optional={false}

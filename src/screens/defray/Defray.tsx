@@ -7,7 +7,12 @@ import ButtonTypeOne from '../../components/button/typeOne/TypeOne';
 import Badge from '../../components/badge/Badge';
 // hooks
 import { useNavigate } from 'react-router-dom'
-import { useAppSelector } from '../../app/store';
+import { useAppSelector, useAppDispatch } from '../../app/store';
+// actions
+import { updateCustomerInfo } from '../../app/slices/shopSlice';
+// types
+import type { ChangeEventHandler } from 'react';
+import type { CustomerInfo } from '../../app/slices/shopSlice';
 
 
 interface Props {
@@ -27,6 +32,27 @@ export default function Defray({ }: Props): ReactElement {
 
   // redux state
   const { cartOrders, subtotal } = useAppSelector(state => state.shop)
+  const dispatch = useAppDispatch()
+
+  // apply-disabled status
+  const [applyDisabled, setApplyDisabled] = useState<boolean>(true)
+
+  /** <InfoInput /> onChange */
+  const handleChange: (key: keyof CustomerInfo) => ChangeEventHandler<HTMLInputElement> = (key) => (e) => {
+    dispatch(updateCustomerInfo({
+      key,
+      value: e.target.value,
+    }))
+  }
+  const handleEmailChange = handleChange('email')
+  const handleFirstNameChange = handleChange('firstName')
+  const handleLastNameChange = handleChange('lastName')
+  const handleSocialAccountChange = handleChange('socialAccount')
+  const handlePhoneChange = handleChange('phone')
+  const handleAddressChange = handleChange('address')
+  const handleApartmentChange = handleChange('apartment')
+  const handleCityChange = handleChange('city')
+
 
   return (
     <div className={DefrayClass.container}>
@@ -40,6 +66,7 @@ export default function Defray({ }: Props): ReactElement {
             warningMessage='Please enter correct type'
             optional={false}
             regCheck={emailRegExp}
+            onChange={handleEmailChange}
           />
         </section>
         <section className={`common-style`}>
@@ -53,6 +80,7 @@ export default function Defray({ }: Props): ReactElement {
               regCheck={nameRegExp}
               width='49%'
               style={infoInputCommonStyle}
+              onChange={handleFirstNameChange}
             />
             <InfoInput
               placeholder='Last name'
@@ -62,6 +90,7 @@ export default function Defray({ }: Props): ReactElement {
               regCheck={nameRegExp}
               width='49%'
               style={infoInputCommonStyle}
+              onChange={handleLastNameChange}
             />
           </div>
           <div className={`input-row-group`}>
@@ -71,6 +100,7 @@ export default function Defray({ }: Props): ReactElement {
               optional={false}
               width='49%'
               style={infoInputCommonStyle}
+              onChange={handleSocialAccountChange}
             />
             <InfoInput
               placeholder='Phone'
@@ -80,6 +110,7 @@ export default function Defray({ }: Props): ReactElement {
               regCheck={phoneRegExp}
               width='49%'
               style={infoInputCommonStyle}
+              onChange={handlePhoneChange}
             />
           </div>
           <InfoInput
@@ -87,18 +118,21 @@ export default function Defray({ }: Props): ReactElement {
             errorMessage='Please enter address'
             optional={false}
             style={infoInputCommonStyle}
+            onChange={handleAddressChange}
           />
           <InfoInput
             placeholder='Apartment, suite, etc. (optional)'
             errorMessage='Please enter Apartment, suite, etc.'
             optional={true}
             style={infoInputCommonStyle}
+            onChange={handleApartmentChange}
           />
           <InfoInput
             placeholder='City'
             errorMessage='Please enter a city'
             optional={false}
             style={infoInputCommonStyle}
+            onChange={handleCityChange}
           />
         </section>
         <section className={`button-row-group`}>
@@ -137,10 +171,11 @@ export default function Defray({ }: Props): ReactElement {
           <InfoInput
             placeholder='Gift card or discount code'
             optional={true}
-            style={{width: '76%'}}
+            style={{ width: '76%' }}
           />
-          <ButtonTypeOne 
+          <ButtonTypeOne
             text='Apply'
+            disabled={applyDisabled}
             mode='light'
             style={{ width: '20%', minWidth: '80px', height: '40px', position: 'relative' }}
           />

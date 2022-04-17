@@ -17,6 +17,7 @@ export default function InfoInput({
   height,
   style,
   regCheck,
+  onChange: handleChange,
   placeholder = '',
   allowClear = true,
   optional = false,
@@ -26,7 +27,7 @@ export default function InfoInput({
   const [value, setValue] = useState<string>('')
   const [status, setStatus] = useState<'error' | 'warning' | ''>('')
   const clickIn = useRef(false)
-  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => { setValue(e.target.value) }
+  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => { setValue(e.target.value); handleChange?.(e); }
   const onFocus = () => { clickIn.current = true }
   const onBlur = () => {
     if (!optional && clickIn.current) {

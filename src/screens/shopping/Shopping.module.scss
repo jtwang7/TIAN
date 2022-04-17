@@ -69,9 +69,10 @@
         box-sizing: border-box;
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around;
 
         .good-card {
+          flex: 0 0 25%;
+          padding: 0px 20px;
           &::after {
             display: block;
             content: '';

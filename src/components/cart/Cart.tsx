@@ -64,7 +64,7 @@ export default function Cart({
     if (!visible) {
       dispatch(deleteZero())
     }
-  }, [cartOrders, visible])
+  }, [visible])
 
   return (
     <Drawer

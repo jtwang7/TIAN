@@ -4,6 +4,7 @@ import { useSpring, animated } from 'react-spring'
 
 interface ButtonTypeOneProps {
   text: string,
+  disabled?: boolean,
   mode?: 'light' | 'dark',
   style?: React.CSSProperties,
   onClick?: React.MouseEventHandler<HTMLDivElement>,
@@ -13,6 +14,7 @@ interface ButtonTypeOneProps {
 
 export default function TypeOne({
   text,
+  disabled = false,
   mode = 'dark',
   style = {},
   onClick = undefined,
@@ -41,10 +43,15 @@ export default function TypeOne({
   return (
     <div
       className={TypeOneClass[`type-one-container-${mode}`]}
-      style={{ width: '180px', height: '40px', ...style }}
-      onMouseEnter={(e) => {onMouseEnter(); handleMouseEnter?.(e)}}
-      onMouseLeave={(e) => {onMouseLeave(); handleMouseLeave?.(e)}}
-      onClick={onClick}
+      style={{
+        width: '180px',
+        height: '40px',
+        cursor: disabled ? 'not-allowed' : 'pointer',
+        ...style,
+      }}
+      onMouseEnter={(e) => { onMouseEnter(); handleMouseEnter?.(e) }}
+      onMouseLeave={(e) => { onMouseLeave(); handleMouseLeave?.(e) }}
+      onClick={disabled ? undefined : onClick}
     >
       <span>{text}</span>
       <animated.div className={`background-container`} style={aniStyles}></animated.div>

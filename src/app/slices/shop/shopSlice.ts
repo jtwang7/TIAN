@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { CaseReducer, PayloadAction } from '@reduxjs/toolkit';
-import type { GoodType } from '../../components/card/good/types';
+import type Shop from './index';
 
-const goods: GoodType[] = [{
-  id: 0, // 商品编号
+const goods: Shop.GoodType[] = [{
+  goodId: 0, // 商品编号
   name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=1',
@@ -17,7 +17,7 @@ const goods: GoodType[] = [{
   score: 4.7, // 评分
   likes: 3, // 喜好数目
 }, {
-  id: 1, // 商品编号
+  goodId: 1, // 商品编号
   name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=11',
@@ -31,7 +31,7 @@ const goods: GoodType[] = [{
   score: 4.7, // 评分
   likes: 3, // 喜好数目
 }, {
-  id: 2, // 商品编号
+  goodId: 2, // 商品编号
   name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=4',
@@ -45,7 +45,7 @@ const goods: GoodType[] = [{
   score: 4.7, // 评分
   likes: 3, // 喜好数目
 }, {
-  id: 3, // 商品编号
+  goodId: 3, // 商品编号
   name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=7',
@@ -59,7 +59,7 @@ const goods: GoodType[] = [{
   score: 4.7, // 评分
   likes: 3, // 喜好数目
 }, {
-  id: 4, // 商品编号
+  goodId: 4, // 商品编号
   name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=1',
@@ -73,7 +73,7 @@ const goods: GoodType[] = [{
   score: 4.7, // 评分
   likes: 3, // 喜好数目
 }, {
-  id: 5, // 商品编号
+  goodId: 5, // 商品编号
   name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=11',
@@ -87,7 +87,7 @@ const goods: GoodType[] = [{
   score: 4.7, // 评分
   likes: 3, // 喜好数目
 }, {
-  id: 6, // 商品编号
+  goodId: 6, // 商品编号
   name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=4',
@@ -101,7 +101,7 @@ const goods: GoodType[] = [{
   score: 4.7, // 评分
   likes: 3, // 喜好数目
 }, {
-  id: 7, // 商品编号
+  goodId: 7, // 商品编号
   name: 'Cookie', // 商品名称
   imgsUrl: [
     'https://picsum.photos/200/300?random=7',
@@ -116,29 +116,12 @@ const goods: GoodType[] = [{
   likes: 3, // 喜好数目
 },]
 
-export interface CartOrder extends GoodType {
-  orderNums: number, // 订单数
-  remark?: string, // 商品额外购物备注 
-}
-
-export interface CustomerInfo {
-  email: string, // 邮箱
-  lastName: string, // 名
-  socialAccount: string, // 社交账号(wx, qq)
-  phone: string, // 电话
-  address: string, // 邮寄地址
-  city: string, // 城市
-  firstName?: string, // 姓
-  apartment?: string, // 团体
-}
-export type CustomerInfoPayload = {key: keyof CustomerInfo, value: string}
-
 export type ShopState = {
   productId: number, // 当前所选商品id
-  goods: GoodType[], // 商品信息
-  cartOrders: CartOrder[], // 购物车订单
+  goods: Shop.GoodType[], // 商品信息
+  cartOrders: Shop.CartOrder[], // 购物车订单
   subtotal: number, // 购物总价格
-  customerInfo: CustomerInfo, // 客户信息
+  customerInfo: Shop.CustomerInfo, // 客户信息
 }
 // store仓库初始值
 const initialState: ShopState = {
@@ -159,7 +142,7 @@ const initialState: ShopState = {
 }
 
 // common function
-const calSubtotal = <T extends CartOrder[]>(cartOrders: T) => {
+const calSubtotal = <T extends Shop.CartOrder[]>(cartOrders: T) => {
   return cartOrders.reduce((prev, item) => (prev + (item.orderNums * item.price)), 0)
 }
 
@@ -169,9 +152,9 @@ const calSubtotal = <T extends CartOrder[]>(cartOrders: T) => {
 const selectProductFn: CaseReducer<ShopState, PayloadAction<number>> = (state, action) => {
   state.productId = action.payload
 }
-const addToCartFn: CaseReducer<ShopState, PayloadAction<GoodType>> = (state, { payload }) => {
-  const ids = state.cartOrders.map(item => (item.id))
-  if (!ids.includes(payload.id)) {
+const addToCartFn: CaseReducer<ShopState, PayloadAction<Shop.GoodType>> = (state, { payload }) => {
+  const ids = state.cartOrders.map(item => (item.goodId))
+  if (!ids.includes(payload.goodId)) {
     /**添加新的商品 */
     state.cartOrders.unshift({
       ...payload,
@@ -181,10 +164,10 @@ const addToCartFn: CaseReducer<ShopState, PayloadAction<GoodType>> = (state, { p
     state.subtotal = calSubtotal(state.cartOrders)
   }
 }
-const changeOrderNumsFn: CaseReducer<ShopState, PayloadAction<{ id: number, nums: number }>> = (state, { payload }) => {
+const changeOrderNumsFn: CaseReducer<ShopState, PayloadAction<{ goodId: number, nums: number }>> = (state, { payload }) => {
   /**更新订单数 */
   for (let item of state.cartOrders) {
-    if (item.id === payload.id) {
+    if (item.goodId === payload.goodId) {
       item.orderNums = payload.nums
     }
   }
@@ -195,7 +178,7 @@ const deleteZeroFn: CaseReducer<ShopState> = (state) => {
   /**清除商品数为0的订单 */
   state.cartOrders = state.cartOrders.filter(item => (item.orderNums !== 0))
 }
-const updateCustomerInfoFn: CaseReducer<ShopState, PayloadAction<CustomerInfoPayload>> = ({ customerInfo }, { payload }) => {
+const updateCustomerInfoFn: CaseReducer<ShopState, PayloadAction<Shop.CustomerInfoPayload>> = ({ customerInfo }, { payload }) => {
   customerInfo[payload.key] = payload.value
 }
 

@@ -14,9 +14,9 @@ import Cart from '../../components/cart/Cart';
 import CartIcon from '../../components/cart/CartIcon';
 // hooks
 import { useAppSelector, useAppDispatch } from '../../app/store';
-import { selectProduct, addToCart } from '../../app/slices/shopSlice';
+import { selectProduct, addToCart } from '../../app/slices/shop/shopSlice';
 // types
-import type { GoodType } from '../../components/card/good/types';
+import type Shop from '../../app/slices/shop';
 
 interface Props {
 
@@ -43,16 +43,16 @@ export default function Shopping({ }: Props): ReactElement {
   }
 
   // add to cart
-  const handleAddToCart = (good: GoodType): void => {
+  const handleAddToCart = (good: Shop.GoodType): void => {
     setCartVisible(true) // 弹出购物车
     dispatch(addToCart(good)) // 添加商品进入购物车
   }
 
   // 当前被选中的商品
-  const [good, setGood] = useState<GoodType | null>(null)
+  const [good, setGood] = useState<Shop.GoodType | null>(null)
   useEffect(() => {
     if (productId !== -1) {
-      const good = goods.find((good) => (good.id === productId))
+      const good = goods.find((good) => (good.goodId === productId))
       good && setGood(good)
     }
   }, [productId])
@@ -117,9 +117,9 @@ export default function Shopping({ }: Props): ReactElement {
               <div className={`good-card`}>
                 <CardGood
                   good={good}
-                  key={good.id}
+                  key={good.goodId}
                   width={300}
-                  onClick={() => { handleGoodCardClick(good.id) }}
+                  onClick={() => { handleGoodCardClick(good.goodId) }}
                 />
               </div>
             ))}

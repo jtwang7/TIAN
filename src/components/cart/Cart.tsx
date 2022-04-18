@@ -1,7 +1,7 @@
 import React, { ReactElement, useEffect, useLayoutEffect } from 'react';
 import CartClass from './Cart.module.scss';
 // Actions
-import { changeOrderNums, deleteZero } from '../../app/slices/shopSlice';
+import { changeOrderNums, deleteZero } from '../../app/slices/shop/shopSlice';
 // types
 import type { DrawerProps } from 'antd/lib/drawer/index';
 // components
@@ -87,7 +87,7 @@ export default function Cart({
             {
               cartOrders.map((good) => (
                 <>
-                  <div className={CartClass['product-info']} key={good.id}>
+                  <div className={CartClass['product-info']} key={good.goodId}>
                     <img alt='product' src={good.imgsUrl[0]} className={'img-style'} />
                     <section className={`detail`}>
                       <p className={`good-name`}>{good.name}</p>
@@ -96,7 +96,7 @@ export default function Cart({
                           width={110}
                           height={30}
                           initValue={good.orderNums}
-                          onChange={(value) => { dispatch(changeOrderNums({ id: good.id, nums: value })) }}
+                          onChange={(value) => { dispatch(changeOrderNums({ goodId: good.goodId, nums: value })) }}
                         />
                         <span>{`RMB ${good.price}`}</span>
                       </div>

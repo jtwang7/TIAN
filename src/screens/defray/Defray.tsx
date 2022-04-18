@@ -1,20 +1,25 @@
 import DefrayClass from './Defray.module.scss';
 import Logo from '../logo.png';
+// networks
+import { registerCustomer, registerOrder } from '../../networks';
 // components
 import InfoInput from './InfoInput';
 import ButtonTypeOne from '../../components/button/typeOne/TypeOne';
 import Badge from '../../components/badge/Badge';
-import {message} from 'antd';
+import { message } from 'antd';
 // hooks
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../../app/store';
 // actions
-import { updateCustomerInfo } from '../../app/slices/shopSlice';
+import { updateCustomerInfo } from '../../app/slices/shop/shopSlice';
 // types
 import type { ChangeEventHandler, MutableRefObject, ReactElement } from 'react';
-import type { CustomerInfo } from '../../app/slices/shopSlice';
+import type Shop from '../../app/slices/shop/index';
 import type { InputRef } from 'antd';
+import type { registerOrderParams, registerCustomerParams } from '../../networks';
+// common functions
+import generateOrderId from '../../functions/randomNumber';
 
 
 interface Props {
@@ -38,9 +43,6 @@ export default function Defray({ }: Props): ReactElement {
   const { cartOrders, subtotal, customerInfo } = useAppSelector(state => state.shop)
   const dispatch = useAppDispatch()
 
-  /** apply-disabled status */
-  const [applyDisabled, setApplyDisabled] = useState<boolean>(true)
-
   /** <InfoInput /> Ref */
   const emailRef = useRef<InputRef>(null!)
   const firstNameRef = useRef<InputRef>(null!)
@@ -53,7 +55,7 @@ export default function Defray({ }: Props): ReactElement {
   const refs: MutableRefObject<InputRef>[] = [emailRef, firstNameRef, lastNameRef, socialAccountRef, phoneRef, addressRef, apartmentRef, cityRef]
 
   /** <InfoInput /> onChange */
-  const handleChange: (key: keyof CustomerInfo) => ChangeEventHandler<HTMLInputElement> = (key) => (e) => {
+  const handleChange: (key: keyof Shop.CustomerInfo) => ChangeEventHandler<HTMLInputElement> = (key) => (e) => {
     dispatch(updateCustomerInfo({
       key,
       value: e.target.value,
@@ -70,6 +72,7 @@ export default function Defray({ }: Props): ReactElement {
 
   /** check customer information */
   const handleCheck = () => {
+    /** 剔除可选项 */
     function exclude<T extends {}>(obj: T, keys: string[]) {
       const data = {}
       for (let [key, value] of Object.entries(obj)) {
@@ -81,11 +84,28 @@ export default function Defray({ }: Props): ReactElement {
       }
       return data
     }
-    const res = exclude<CustomerInfo>(customerInfo, ['firstName', 'apartment'])
+    const res = exclude<Shop.CustomerInfo>(customerInfo, ['firstName', 'apartment', 'city'])
+    /** 判断必填数据是否填写完整 */
     if (Object.values(res).every(item => (item !== ''))) {
-      console.log('存储到数据库')
+      const orderId = generateOrderId() // 生成订单编号
+      const customerParams: registerCustomerParams = {
+        orderId,
+        ...customerInfo,
+      }
+      registerCustomer(customerParams)
+
+      const ordersParams: registerOrderParams[] = cartOrders.map(order => ({
+        orderId,
+        goodId: order.goodId,
+        orderNums: order.orderNums,
+        remark: order.remark ?? '',
+      }))
+      for (let orderParams of ordersParams) {
+        registerOrder(orderParams)
+      }
     } else {
       message.error('存在未填写的必选项')
+      /** 主动触发各<Input />的error提示 */
       refs.forEach(ref => {
         ref.current.focus()
         ref.current.blur()
@@ -183,21 +203,15 @@ export default function Defray({ }: Props): ReactElement {
           />
           <InfoInput
             ref={cityRef}
-            placeholder='City'
+            placeholder='City (optional)'
             errorMessage='Please enter a city'
-            optional={false}
+            optional={true}
             style={infoInputCommonStyle}
             value={customerInfo.city}
             onChange={handleCityChange}
           />
         </section>
         <section className={`button-row-group`}>
-          <ButtonTypeOne
-            text='Save'
-            mode='light'
-            style={{ width: '100px', height: '35px', position: 'relative' }}
-            onClick={handleCheck}
-          />
           <span
             className={`text-button`}
             onClick={backToCart}
@@ -224,19 +238,6 @@ export default function Defray({ }: Props): ReactElement {
             ))
           }
         </section>
-        <section className={`apply-group`}>
-          <InfoInput
-            placeholder='Gift card or discount code'
-            optional={true}
-            style={{ width: '76%' }}
-          />
-          <ButtonTypeOne
-            text='Apply'
-            disabled={applyDisabled}
-            mode='light'
-            style={{ width: '20%', minWidth: '80px', height: '40px', position: 'relative' }}
-          />
-        </section>
         <section className={`subtotal`}>
           <div className={`item`}><span>Subtotal</span><span>{`RMB ${subtotal}`}</span></div>
           <div className={`item`}><span>Discount</span><span>{`-RMB ${0}`}</span></div>
@@ -245,6 +246,19 @@ export default function Defray({ }: Props): ReactElement {
           <span>Total</span>
           <span className={`total-money`}>{`RMB ${subtotal - 0}`}</span>
         </div>
+        <section className={`apply-group`}>
+          <InfoInput
+            placeholder='Gift card or discount code'
+            optional={true}
+            style={{ width: '76%' }}
+          />
+          <ButtonTypeOne
+            text='Buy'
+            mode='light'
+            style={{ width: '20%', minWidth: '80px', height: '40px', position: 'relative' }}
+            onClick={handleCheck}
+          />
+        </section>
       </div>
     </div>
   )

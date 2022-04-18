@@ -1,4 +1,4 @@
-import React, { ReactElement, ReactNode } from 'react';
+import React, { ReactElement } from 'react';
 import BadgeClass from './Badge.module.scss';
 // types
 import { ReactProps, SizeProps } from '../../types/baseTypes';

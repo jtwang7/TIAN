@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 // 切片
-import shopSlice from './slices/shopSlice'
+import shopSlice from './slices/shop/shopSlice'
 
 const reducer = {
   shop: shopSlice.reducer,

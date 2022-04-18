@@ -4,11 +4,11 @@ import GoodClass from './Good.module.scss';
 import { Carousel } from 'antd';
 // types
 import type { ReactProps, SizeProps, Override } from '../../../types/baseTypes';
-import type { GoodType } from './types';
+import type Shop from '../../../app/slices/shop';
 import type { CarouselRef } from 'antd/lib/carousel';
 
 interface Props {
-  good: GoodType, // 商品
+  good: Shop.GoodType, // 商品
   width?: number, // 容器宽度
   onClick?: MouseEventHandler<HTMLDivElement>,
 }

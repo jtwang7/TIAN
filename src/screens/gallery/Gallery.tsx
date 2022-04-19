@@ -4,9 +4,9 @@ import Photo1 from './images/olimpia-campean-3TtpGHQN2Xg-unsplash.jpg';
 import GalleryClass from './Gallery.module.scss';
 // components
 import { Parallax } from 'react-parallax';
+import Macy from 'macy';
 // types
 import type { ReactElement } from 'react';
-
 
 export interface GalleryProps {
   title?: {
@@ -46,6 +46,9 @@ export default function Gallery({
           </section>
         </div>
       </Parallax>
+      <section className={`photos`}>
+        <LazyLoad imgs={} imgHeight={} />
+      </section>
     </div>
   )
 }

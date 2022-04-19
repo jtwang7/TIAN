@@ -21,6 +21,7 @@
     "antd": "^4.19.5",
     "axios": "^0.26.1",
     "classnames": "^2.3.1",
+    "macy": "^2.5.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-parallax": "^3.3.0",

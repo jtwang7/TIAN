@@ -62,6 +62,8 @@ export default function NoticeBar({
           </animated.span>
         ))
       }
+      <div className={NoticeBarClass.cover} style={{width: '100px', height: `${height}px`, left: '0px'}}></div>
+      <div className={NoticeBarClass.cover} style={{width: '300px', height: `${height}px`, right: '0px'}}></div>
     </div>
   )
 }

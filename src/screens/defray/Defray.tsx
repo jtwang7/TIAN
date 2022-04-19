@@ -92,7 +92,7 @@ export default function Defray({ }: Props): ReactElement {
         orderId,
         ...customerInfo,
       }
-      registerCustomer(customerParams)
+      registerCustomer(customerParams) // 客户信息录入数据库
 
       const ordersParams: registerOrderParams[] = cartOrders.map(order => ({
         orderId,
@@ -101,7 +101,7 @@ export default function Defray({ }: Props): ReactElement {
         remark: order.remark ?? '',
       }))
       for (let orderParams of ordersParams) {
-        registerOrder(orderParams)
+        registerOrder(orderParams) // 订单信息录入数据库
       }
     } else {
       message.error('存在未填写的必选项')

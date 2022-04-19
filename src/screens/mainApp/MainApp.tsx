@@ -47,11 +47,10 @@ export default function MainApp({
       <div className={MainAppClass['main-app-container']}>
         <Outlet />
         <section>
-          <NoticeBar contents={noticeInfos} style={{ position: 'fixed' }} interval={5000} height={60} />
+          <NoticeBar contents={noticeInfos} style={{ position: 'fixed' }} interval={5000} height={40} />
           <Menu routes={routes} />
           <nav className='nav-content' >
-            <a href="http://wangjintian.com" className='a1'>LIFE IN TIAN‘s Blog.com</a>
-            <a className='a2'>LIFE PHOTOGRAPHY BY WANG JINTIAN</a>
+            <a href="http://wangjintian.com" className='a2'>LIFE PHOTOGRAPHY BY WANG JINTIAN</a>
           </nav>
         </section>
         {/* Back to Top */}

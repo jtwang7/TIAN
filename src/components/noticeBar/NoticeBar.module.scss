@@ -1,22 +1,32 @@
-$height: 50px;
+@use '../../styles/variable' as obj;
+
+$height: 40px;
 
 .container {
   width: 100vw;
   height: $height;
-  background-color: #323232;
+  background-color: obj.$light-black;
   color: #fff;
   overflow: hidden;
   position: absolute;
   top: 0;
   z-index: 999;
 
+  .cover {
+    display: block;
+    position: fixed;
+    background-color: obj.$light-black;
+    height: $height;
+    z-index: 999;
+  }
+
   span {
     width: 100vw;
-    text-align: center; // 文本水平居中
-    line-height: $height; // 文本垂直居中
+    margin: auto;
+    text-align: center;
     position: absolute;
-    top: 0;
-    font-family: 'georgia_pro';
+    inset: 0;
+    font-family: "georgia_pro";
     font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase; // 英文大写

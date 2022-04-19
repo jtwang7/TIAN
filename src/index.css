@@ -14,32 +14,4 @@ code {
 
 @import '~antd/dist/antd.css';
 
-@font-face {
-  font-family: 'beauty-demo';
-  src: url(./fonts/BeautyDemo.ttf);
-}
-
-@font-face {
-  font-family: 'ars_maquette_pro';
-  src: url(./fonts/ARSMaquettePro.ttf);
-}
-
-@font-face {
-  font-family: 'dtl_albertina_tregular';
-  src: url(./fonts/DTL\ Albertina\ T\ Regular.otf);
-}
-
-@font-face {
-  font-family: 'georgia_pro';
-  src: url(./fonts/GeorgiaPro-SemiBold.ttf);
-}
-
-@font-face {
-  font-family: 'georgia_pro_light';
-  src: url(./fonts/GeorgiaPro-Light.ttf);
-}
-
-@font-face {
-  font-family: 'right-on';
-  src: url(./fonts/RighOn.otf);
-}
+@import './fonts/fonts.css';

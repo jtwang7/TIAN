@@ -13,6 +13,7 @@ import Coffee from './screens/galleries/coffee/Coffee';
 import Restaurant from './screens/galleries/restaurant/Restaurant';
 import Shopping from './screens/shopping/Shopping';
 import Defray from './screens/defray/Defray';
+import Gallery from './screens/gallery/Gallery';
 
 interface Props {
 
@@ -28,6 +29,7 @@ export default function Root({ }: Props): ReactElement {
       ]
     },
     { name: 'SHOPPING', path: '/shopping', icon: 'ra-footprint' },
+    {name:'GALLERY', icon: 'ra-aware', path: '/gallery'},
   ]
 
   return (
@@ -45,6 +47,8 @@ export default function Root({ }: Props): ReactElement {
           </Route>
           {/* SHOPPING */}
           <Route path='shopping' element={<Shopping />}></Route>
+          {/* GALLERY */}
+          <Route path='gallery' element={<Gallery />}></Route>
         </Route>
         {/* DEFRAY */}
         <Route path='defray' element={<Defray />}></Route>

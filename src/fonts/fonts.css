@@ -1,0 +1,34 @@
+@font-face {
+  font-family: 'beauty-demo';
+  src: url(./BeautyDemo.ttf);
+}
+
+@font-face {
+  font-family: 'ars_maquette_pro';
+  src: url(./ARSMaquettePro.ttf);
+}
+
+@font-face {
+  font-family: 'dtl_albertina_tregular';
+  src: url(./DTL\ Albertina\ T\ Regular.otf);
+}
+
+@font-face {
+  font-family: 'georgia_pro';
+  src: url(./GeorgiaPro-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: 'georgia_pro_light';
+  src: url(./GeorgiaPro-Light.ttf);
+}
+
+@font-face {
+  font-family: 'right-on';
+  src: url(./RighOn.otf);
+}
+
+@font-face {
+  font-family: 'hurme_geometric_sans3_bold';
+  src: url(./HurmeGeometricSans3\ Bold.ttf);
+}

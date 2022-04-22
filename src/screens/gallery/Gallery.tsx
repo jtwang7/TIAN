@@ -47,7 +47,7 @@ export default function Gallery({
         </div>
       </Parallax>
       <section className={`photos`}>
-        <LazyLoad imgs={} imgHeight={} />
+        {/* <LazyLoad imgs={} imgHeight={} /> */}
       </section>
     </div>
   )
